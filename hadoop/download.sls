@@ -16,7 +16,7 @@ import os
 import pdb
 
 # 3rd party libs
-from jinja2 import Environment
+from jinja2 import Environment, FileSystemLoader
 import requests
 
 def run():
