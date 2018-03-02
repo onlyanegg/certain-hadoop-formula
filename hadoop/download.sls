@@ -26,7 +26,7 @@ def run():
       '{0}/hadoop-{1}/hadoop-{1}.tar.gz'.format(mirror, hadoop['version'])
     )
 
-  if hadoop['source']['translate_sum'].lower() == 'true':
+  if hadoop['source']['translate_sum']:
     source_hash = parse_apache_hash_file(
       '{0}/hadoop-{1}/hadoop-{1}.tar.gz.mds'.format(
         hadoop['source']['sum'],
