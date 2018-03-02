@@ -13,7 +13,6 @@ The state object is returned from the run() function as a dictionary.
 
 # Built-in libs
 import os
-import pdb
 
 # 3rd party libs
 from jinja2 import Environment, FileSystemLoader
@@ -21,6 +20,7 @@ from jinja2 import Environment, FileSystemLoader
 def run():
   hadoop = import_hadoop_with_context()
 
+  mirrors = []
   for mirror in hadoop['source']['mirrors']:
     mirrors.append(
       '{0}/hadoop-{1}/hadoop-{1}.tar.gz'.format(mirror, hadoop['version'])
