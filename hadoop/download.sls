@@ -32,7 +32,7 @@ def run():
 
   return {
     'hadoop_bin_downloaded': {
-      'file_managed': [
+      'file.managed': [
         {'name': '/opt/hadoop-{}.tar.gz'.format(hadoop['version'])}, 
         {'source': mirrors}, 
         {'source_hash': source_hash}
