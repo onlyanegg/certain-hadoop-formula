@@ -17,23 +17,24 @@ import pdb
 
 # 3rd party libs
 from jinja2 import Environment, FileSystemLoader
-import requests
 
 def run():
-  pdb.set_trace()
   hadoop = import_hadoop_with_context()
-  source_hash = parse_apache_hash_file(
-    '{0}/hadoop-{1}/hadoop-{1}.tar.gz.mds'.format(
-      hadoop['source']['sum'],
-      hadoop['version']
-    )
-  )
 
-  mirrors = []
   for mirror in hadoop['source']['mirrors']:
     mirrors.append(
       '{0}/hadoop-{1}/hadoop-{1}.tar.gz'.format(mirror, hadoop['version'])
     )
+
+  if hadoop['source']['translate_sum'].lower() == 'true':
+    source_hash = parse_apache_hash_file(
+      '{0}/hadoop-{1}/hadoop-{1}.tar.gz.mds'.format(
+        hadoop['source']['sum'],
+        hadoop['version']
+      )
+    )
+  else:
+    source_hash = hadoop['source']['sum']
 
   return {
     'hadoop_bin_downloaded': {
@@ -101,6 +102,6 @@ def parse_apache_hash_file(url):
       checksum = ''.join(line.split()[3:]).lower()
       break
   else:
-    return ''
+    return 'Checksum could not be found in {}'.format(url)
 
   return checksum

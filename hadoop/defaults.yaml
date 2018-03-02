@@ -1,6 +1,10 @@
 hadoop:
   version: 3.0.0
   source:
+    # Checksums from Apache cannot be interpreted by Salt. When translate_sum
+    # is True, this formula translates the checksums returned from an http
+    # request to a valid format.
+    translate_sum: True
     sum: https://dist.apache.org/repos/dist/release/hadoop/common
     mirrors:
       - http://apache.claz.org/hadoop/common
