@@ -19,7 +19,7 @@ def run():
   pdb.set_trace()
   env = Environment()
   template = env.from_string(
-    __salt__['cp.cache_file']('salt://hadoop/settings.sls')
+    __salt__['cp.cache_file']('salt://hadoop/settings.sls', saltenv='common')
   )
 
   settings = template.make_module(vars={'salt': __salt__})
