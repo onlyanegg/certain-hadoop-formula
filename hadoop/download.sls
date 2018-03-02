@@ -22,7 +22,12 @@ import requests
 def run():
   pdb.set_trace()
   hadoop = import_hadoop_with_context()
-  source_hash = parse_apache_hash_file(hadoop['source']['sum'])
+  source_hash = parse_apache_hash_file(
+    '{0}/hadoop-{1}/hadoop-{1}.tar.gz.mds'.format(
+      hadoop['source']['sum'],
+      hadoop['version']
+    )
+  )
 
   mirrors = []
   for mirror in hadoop['source']['mirrors']:
