@@ -11,19 +11,26 @@ Note that this file uses the
 The state object is returned from the run() function as a dictionary.
 '''
 
+# Built-in libs
+import os
+import pdb
+
+# 3rd party libs
 from jinja2 import Environment
 import requests
-import pdb
 
 def run():
   pdb.set_trace()
-  env = Environment(extensions=[
-    'jinja2.ext.do',
-    'salt.utils.jinja.SerializerExtension'
-  ])
   settings_file = __salt__['cp.cache_file'](
     'salt://hadoop/settings.sls',
     saltenv='common'
+  )
+
+  env = Environment(extensions=[
+      'jinja2.ext.do',
+      'salt.utils.jinja.SerializerExtension'
+    ],
+      loader=FileSystemLoader(os.path.dirname(settings_file))
   )
 
   with open(settings_file, 'r') as f:
