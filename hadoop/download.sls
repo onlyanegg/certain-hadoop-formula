@@ -26,15 +26,20 @@ def run():
     saltenv='common'
   )
 
+  # The template directory needs to be one level above the directory where the
+  # templates actually live, because settings.sls references 'hadoop/settings.sls'
+  template_dir = os.sep.join(settings_file.split(os.sep)[:-2])
+
   env = Environment(extensions=[
       'jinja2.ext.do',
       'salt.utils.jinja.SerializerExtension'
     ],
-      loader=FileSystemLoader(os.path.dirname(settings_file))
+      loader=FileSystemLoader(template_dir)
   )
 
-  with open(settings_file, 'r') as f:
-    template = env.from_string(f.read())
+  template = env.get_template(os.sep.join(['hadoop','settings.sls']))
+  #with open(settings_file, 'r') as f:
+  #  template = env.from_string(f.read())
 
   settings = template.make_module(vars={'salt': __salt__})
 
