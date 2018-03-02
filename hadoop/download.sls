@@ -17,7 +17,7 @@ import pdb
 
 def run():
   pdb.set_trace()
-  env = Environment()
+  env = Environment(extensions=['jinja2.ext.do'])
   settings_file = __salt__['cp.cache_file'](
     'salt://hadoop/settings.sls',
     saltenv='common'
