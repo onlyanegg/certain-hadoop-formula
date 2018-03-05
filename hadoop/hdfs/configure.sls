@@ -5,7 +5,7 @@ hadoop_hdfs_config_serialized:
     - name: /etc/hadoop/hdfs-site.xml
     - dataset: {{ hadoop.hdfs.config }}
     - formatter: xml_badgerfish
-    - user: {{ hadoop.hdfs.user }}
-    - group: {{ hadoop.hdfs.group }}
+    - user: {{ hadoop.hdfs.user.name }}
+    - group: {{ hadoop.hdfs.group.name }}
     - makedirs: True
     - mode: 644
