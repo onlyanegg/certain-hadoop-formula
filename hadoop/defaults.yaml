@@ -36,3 +36,12 @@ hadoop:
       - http://supergsego.com/apache/hadoop/common
       - http://www.gtlib.gatech.edu/pub/apache/hadoop/common
       - http://www.trieuvan.com/apache/hadoop/common
+  hdfs:
+    user:
+      name: hdfs
+      uid: 3000
+    group:
+      name: hdfs
+      gid:
+    config:
+      dfs.namenode.name.dir: '/var/run/hadoop/hdfs/name_node/'

@@ -23,8 +23,8 @@
 {%- endfor %}
 {%- set checksum = checksums[0] %}
 
-hadoop_bin_downloaded:
+hadoop_archive_downloaded:
   file.managed:
-    - name: /opt/hadoop-{{ hadoop.version }}
+    - name: /opt/hadoop-{{ hadoop.version }}.tar.gz
     - source: {{ mirrors }}
     - source_hash: {{ checksum }}
