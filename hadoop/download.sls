@@ -10,7 +10,10 @@
 
 {%- set checksums = [] %}
 {%- set ret = salt['http.query'](
-    '{0}/hadoop-{1}/hadoop-{1}.tar.gz.mds'.format(hadoop.source.sum)
+    '{0}/hadoop-{1}/hadoop-{1}.tar.gz.mds'.format(
+      hadoop.source.sum,
+      hadoop.version
+    )
   )
 %}
 {%- for line in ret.body.split('\n') %}
