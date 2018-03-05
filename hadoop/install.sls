@@ -28,3 +28,10 @@ hadoop_archive_extracted:
     - name: /opt/hadoop-{{ hadoop-version }}
     - source: {{ mirrors }}
     - source_hash: {{ checksum }}
+
+hadoop_dir_symlinked:
+  file.symlink:
+    - name: /opt/hadoop
+    - target: /opt/hadoop-{{ hadoop-version }}
+    - onchanges:
+      - archive: hadoop_archive_extracted
