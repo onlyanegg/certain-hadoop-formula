@@ -1,7 +1,7 @@
 {% from 'hadoop/settings.sls' import hadoop with context -%}
 
 hadoop_hdfs_config_serialized:
-  file.serialze:
+  file.serialize:
     - name: /etc/hadoop/hdfs-site.xml
     - dataset: {{ hadoop.hdfs.config }}
     - formatter: xml

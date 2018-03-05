@@ -39,9 +39,9 @@ hadoop:
   hdfs:
     user:
       name: hdfs
-      uid: 3000
+      uid: 3011
     group:
       name: hdfs
-      gid:
+      gid: 3011
     config:
       dfs.namenode.name.dir: '/var/run/hadoop/hdfs/name_node/'
