@@ -44,4 +44,18 @@ hadoop:
       name: hdfs
       gid: 3011
     config:
-      dfs.namenode.name.dir: '/var/run/hadoop/hdfs/name_node/'
+      dfs:
+        namenode:
+          name:
+            dir: '/var/run/hadoop/hdfs/name_node/'
+  yarn:
+    user:
+      name: hdfs
+      uid: 3011
+    group:
+      name: hdfs
+      gid: 3011
+    config:
+      yarn:
+        resourcemanager:
+          address: '127.0.0.1:3000'
