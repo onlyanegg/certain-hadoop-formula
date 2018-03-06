@@ -1,0 +1,12 @@
+# This formula requires an SDB store that is common to all boxes. Initialization
+# of the hadoop cluster requires dynamic configuration and requires each node
+# the cluster to know where the managers are. These values are kept in SDB. 
+#
+# The following pillar configures a memcached SDB store via the Salt formula
+# https://github.com/saltstack-formulas/salt-formula
+salt:
+  minion:
+    hadoop:
+      driver: memcached
+      memcached.host: 10.0.1.3
+      memcached.port: 11211

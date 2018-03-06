@@ -11,5 +11,5 @@
 {% set name_node = sorted(hadoop_nodes)[0] %}
 {% set resource_manager = sorted(hadoop_nodes)[0] %}
 
-{% do salt['sdb.set']('sdb://hadoop/name_node', name_node -%}
-{% do salt['sdb.set']('sdb://hadoop/resource_manager', resource_manager -%}
+{% do salt['sdb.set']('sdb://hadoop/name_node', name_node) -%}
+{% do salt['sdb.set']('sdb://hadoop/resource_manager', resource_manager) -%}
