@@ -34,7 +34,7 @@
               },
               'resource-tracker': {
                 'address': ''
-              }
+              },
               'hostname': {}
             }
           }
