@@ -75,7 +75,7 @@ hadoop:
       config:
         yarn:
           resourcemanager:
-            hostname: {{ grains.hostname }}
+            hostname: {{ grains.nodename }}
   name_node:
     hdfs:
       config: {}
