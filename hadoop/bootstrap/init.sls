@@ -2,7 +2,6 @@
 
 {% set hadoop_nodes = salt['saltutil.runner'](
     'manage.up', tgt=hadoop.target, tgt_type=hadoop.target_type
-    }
   )
 -%}
 
