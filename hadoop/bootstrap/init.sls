@@ -8,8 +8,8 @@
 {# This should return the same node every time, even after adding or removing
 #  boxes.
 #}
-{% set name_node = sorted(hadoop_nodes)[0] %}
-{% set resource_manager = sorted(hadoop_nodes)[0] %}
+{% set name_node = hadoop_nodes[0] %}
+{% set resource_manager = hadoop_nodes[0] %}
 
 {% do salt['sdb.set']('sdb://hadoop/name_node', name_node) -%}
 {% do salt['sdb.set']('sdb://hadoop/resource_manager', resource_manager) -%}
