@@ -1,8 +1,10 @@
 {% from 'hadoop/settings.sls' import hadoop with context -%}
 
 {% set hadoop_nodes = salt['saltutil.runner'](
-    'manage.up', 'tgt={}'.format(hadoop.target),
-    'tgt_type={}'.format(hadoop.target_type)
+    'manage.up', kwarg={
+      'tgt': hadoop.target,
+      'tgt_type': hadoop.target_type
+    }
   )
 -%}
 
