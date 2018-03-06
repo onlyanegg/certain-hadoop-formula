@@ -36,6 +36,11 @@ hadoop:
       - http://supergsego.com/apache/hadoop/common
       - http://www.gtlib.gatech.edu/pub/apache/hadoop/common
       - http://www.trieuvan.com/apache/hadoop/common
+  target: 'if101*'
+  target_type: glob
+  config:  # core-site.xml
+    fs:
+      defaultFS: {{ name_node_uri }}
   hdfs:
     user:
       name: hdfs
@@ -59,3 +64,20 @@ hadoop:
       yarn:
         resourcemanager:
           address: '127.0.0.1:3000'
+  node_manager:
+    hdfs:
+      config: {}
+    yarn:
+      config: {}
+  resource_manager:
+    yarn:
+      config:
+        yarn:
+          resourcemanager:
+            hostname: {{ grains.hostname }
+  name_node:
+    hdfs:
+      config: {}
+    yarn:
+      config: {}
+  data_node:
