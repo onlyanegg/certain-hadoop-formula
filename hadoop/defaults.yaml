@@ -40,7 +40,8 @@ hadoop:
   target_type: glob
   config:  # core-site.xml
     fs:
-      defaultFS: {{ name_node_uri }}
+      #defaultFS: {{ name_node_uri }}
+      defaultFS: hello
   hdfs:
     user:
       name: hdfs
