@@ -23,7 +23,7 @@
         'fs': {
           'deafultFS': 'hdfs://{host}:{port}'.format(**dynamic_config.name_node)
         }
-      }
+      },
       'yarn': {
         'config': {
           'yarn': {
