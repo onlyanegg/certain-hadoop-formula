@@ -15,12 +15,14 @@
 {% do ret.append(salt['sdb.set']('sdb://hadoop/name_node', name_node)) -%}
 {% do ret.append(salt['sdb.set']('sdb://hadoop/resource_manager', resource_manager)) -%}
 
-{% if all(ret) -%}
-hadoop_bootstrap_succeeded:
-  test.succeed_without_changes:
-    - name: 'Successfully configured the Hadoop NameNode and ResourceManager'
-{% else -%}
+# {{ ret }}
+
+{% if 'false' in ret -%}
 hadoop_bootstrap_failed:
   test.fail_without_changes:
     - name: 'Failed to configure the Hadoop NameNode and ResourceManager'
+{% else -%}
+hadoop_bootstrap_succeeded:
+  test.succeed_without_changes:
+    - name: 'Successfully configured the Hadoop NameNode and ResourceManager'
 {%- endif %}
