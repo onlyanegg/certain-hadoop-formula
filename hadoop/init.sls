@@ -7,3 +7,4 @@ include:
 {%- else %}
   - .node_manager
   - .data_node
+{%- endif %}
