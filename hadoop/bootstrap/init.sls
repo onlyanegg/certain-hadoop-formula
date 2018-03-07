@@ -21,14 +21,17 @@ hadoop_bootstrap_failed:
     - result: False
     - comment: 'Failed to configure the Hadoop NameNode and ResourceManager. Is SDB available?'
 {% else -%}
+  {% set message = (
+      "Successfully configured the Hadoop NameNode and ResourceManager.\n"
+      "NameNode: {}\n" 
+      "ResourceManager: {}\n"
+    ).format(
+      salt['sdb.get']('sdb://hadoop/name_node'),
+      salt['sdb.get']('sdb://hadoop/resource_manager')
+    )
+  -%}
 hadoop_bootstrap_succeeded:
   test.configurable_test_state:
     - result: True
-    - comment: "\
-        Successfully configured the Hadoop NameNode and ResourceManager. \n\
-        NameNode: {}\n\
-        ResourceManager: {}\n".format(
-          salt['sdb.get']('sdb://hadoop/name_node')
-          salt['sdb.get']('sdb://hadoop/resource_manager')
-        )
+    - comment: message
 {%- endif %}
