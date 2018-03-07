@@ -9,10 +9,12 @@
 {# Dynamic configuration like node_manager hostname must be added here. Pillar
 #  cannot reference pillar.
 #}
+{#
+{%- from 'hadoop/dynamic.sls' import hadoop as hadoop_dynamic with context %}
 {%- set dynamic_config = {
     'name_node': {
-      'host': salt.sdb.get('sdb://hadoop/name_node'),
-      'port': 3000
+      'host': salt['sdb.get']('sdb://hadoop/name_node'),
+      'port': hadoop.name_node.port
     }
   }
 %}
@@ -45,3 +47,4 @@
 %}
 
 {%- do salt.slsutil.update(hadoop, hadoop_dynamic) %}
+#}

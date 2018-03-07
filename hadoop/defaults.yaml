@@ -38,10 +38,6 @@ hadoop:
       - http://www.trieuvan.com/apache/hadoop/common
   target: 'if101*'
   target_type: glob
-  config:  # core-site.xml
-    fs:
-      #defaultFS: {# name_node_uri #}
-      defaultFS: hello
   hdfs:
     user:
       name: hdfs
@@ -56,29 +52,29 @@ hadoop:
             dir: '/var/run/hadoop/hdfs/name_node/'
   yarn:
     user:
-      name: hdfs
-      uid: 3011
+      name: yarn
+      uid: 3012
     group:
-      name: hdfs
-      gid: 3011
-    config:
-      yarn:
-        resourcemanager:
-          address: '127.0.0.1:3000'
-  node_manager:
-    hdfs:
-      config: {}
-    yarn:
-      config: {}
+      name: yarn
+      gid: 3012
   resource_manager:
     yarn:
       config:
         yarn:
           resourcemanager:
-            hostname: {{ grains.nodename }}
+            hostname: '0.0.0.0:3001'
   name_node:
+    port: 3000
     hdfs:
-      config: {}
-    yarn:
-      config: {}
+      config:
+        dfs:
+          namenode:
+            name:
+              dir: '/var/run/hadoop/NameNode'
   data_node:
+    hdfs:
+      config:
+        dfs:
+          namenode:
+            name:
+              dir: '/var/run/hadoop/DataNode'

@@ -10,3 +10,70 @@ salt:
       driver: memcached
       memcached.host: 10.0.1.3
       memcached.port: 11211
+
+
+# Hadoop settings
+hadoop:
+  version: 3.0.0
+  target: 'if101*'
+  target_type: glob
+
+  # core-site.xml - These config parameters apply to all roles
+  core:
+
+  hdfs:
+    user:
+      name: hdfs
+      uid: 3011
+    group:
+      name: hdfs
+      gid: 3011
+
+    # hdfs-site.xml - These config parameters apply to all roles
+    config:
+      dfs:
+        namenode:
+          name:
+            dir: '/var/run/hadoop/hdfs/name_node/'
+
+  yarn:
+    user:
+      name: yarn
+      uid: 3012
+    group:
+      name: yarn
+      gid: 3012
+
+  # Parameters specific to the ResourceManager role
+  resource_manager:
+    yarn:
+
+      # yarn-site.xml
+      config:
+        yarn:
+          resourcemanager:
+            hostname: '0.0.0.0:3001'
+
+  # Parameters specific to the ResourceManager role
+  name_node:
+    port: 3000
+    hdfs:
+
+      # hdfs-site.xml
+      config:
+        dfs:
+          namenode:
+            name:
+              dir: '/var/run/hadoop/NameNode'
+
+  # Parameters specific to the ResourceManager role
+  data_node:
+    hdfs:
+      config:
+        dfs:
+          namenode:
+            name:
+              dir: '/var/run/hadoop/DataNode'
+
+  # Parameters specific to the ResourceManager role
+  node_manager:
