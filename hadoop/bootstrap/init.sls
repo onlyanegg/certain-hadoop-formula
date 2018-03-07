@@ -12,10 +12,8 @@
 {% set resource_manager = hadoop_nodes[0] -%}
 
 {% set ret = [] -%}
-{% do ret.append(salt['sdb.set']('sdb://ihadoop/name_node', name_node)) -%}
+{% do ret.append(salt['sdb.set']('sdb://hadoop/name_node', name_node)) -%}
 {% do ret.append(salt['sdb.set']('sdb://hadoop/resource_manager', resource_manager)) -%}
-
-# {{ ret }}
 
 {% if False in ret -%}
 hadoop_bootstrap_failed:
