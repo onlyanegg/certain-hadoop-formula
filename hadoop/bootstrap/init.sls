@@ -34,6 +34,6 @@ hadoop_bootstrap_succeeded:
   test.configurable_test_state:
     - result: True
     - comment: |
-      {{ message }}
+        {{ message }}
     - changes: False
 {%- endif %}
