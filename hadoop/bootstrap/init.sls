@@ -17,7 +17,7 @@
 
 # {{ ret }}
 
-{% if 'false' in ret -%}
+{% if False in ret -%}
 hadoop_bootstrap_failed:
   test.fail_without_changes:
     - name: 'Failed to configure the Hadoop NameNode and ResourceManager'
