@@ -8,8 +8,19 @@
 {# This should return the same node every time, even after adding or removing
 #  boxes.
 #}
-{% set name_node = hadoop_nodes[0] %}
-{% set resource_manager = hadoop_nodes[0] %}
+{% set name_node = hadoop_nodes[0] -%}
+{% set resource_manager = hadoop_nodes[0] -%}
 
-{% do salt['sdb.set']('sdb://hadoop/name_node', name_node) -%}
-{% do salt['sdb.set']('sdb://hadoop/resource_manager', resource_manager) -%}
+{% set ret = [] -%}
+{% do ret.append(salt['sdb.set']('sdb://hadoop/name_node', name_node)) -%}
+{% do ret.append(salt['sdb.set']('sdb://hadoop/resource_manager', resource_manager)) -%}
+
+{% if all(ret) -%}
+hadoop_bootstrap_succeeded:
+  test.succeed_without_changes:
+    - name: 'Successfully configured the Hadoop NameNode and ResourceManager'
+{% else -%}
+hadoop_bootstrap_failed:
+  test.fail_without_changes:
+    - name: 'Failed to configure the Hadoop NameNode and ResourceManager'
+{%- endif %}
