@@ -10,5 +10,6 @@ hadoop_hdfs_user_present:
     - name: {{ hadoop.hdfs.user.name }}
     - uid: {{ hadoop.hdfs.user.uid }}
     - gid_from_name: True
+    - createhome: False
     - require:
       - group: {{ hadoop.hdfs.group.name }}
