@@ -12,6 +12,8 @@
 {%- do salt.slsutil.update(hadoop, hadoop_pillar) %}
 {%- do salt.slsutil.update(hadoop, hadoop_grains) %}
 
+# hadoop: {{ hadoop }}
+
 {# Dynamic configuration like node_manager hostname must be added here. Pillar
 #  cannot reference pillar.
 #}
