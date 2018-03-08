@@ -38,23 +38,26 @@ hadoop:
       - http://www.trieuvan.com/apache/hadoop/common
   target: 'if101*'
   target_type: glob
+  group:
+    name: hadoop
+    gid: 3011
   hdfs:
     user:
       name: hdfs
-      uid: 3011
+      uid: 3012
     group:
       name: hdfs
-      gid: 3011
+      gid: 3012
     environment:
       JAVA_HOME: /usr/lib/java
     config: {}
   yarn:
     user:
       name: yarn
-      uid: 3012
+      uid: 3013
     group:
       name: yarn
-      gid: 3012
+      gid: 3013
     environment:
       JAVA_HOME: /usr/lib/java
   name_node:
