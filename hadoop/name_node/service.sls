@@ -1,6 +1,6 @@
 {% from 'hadoop/settings.sls' import hadoop with context -%}
 
-hadoop_name_node_service:
+{{ hadoop.name_node.service.name }}_service:
   service.running:
-    - name: hdfs_name_node
+    - name: {{ hadoop.name_node.service.name }}
     - enable: True
