@@ -5,8 +5,8 @@ include:
 
 hadoop_name_node_service_file_installed:
   file.managed:
-    - name: /etc/systemd/system/hadoop_name_node.service
-    - source: salt://hadoop/files/hadoop_name_node.service
+    - name: /etc/systemd/system/hdfs_name_node.service
+    - source: salt://hadoop/files/hdfs_name_node.service
     - template: jinja
     - context:
         user: {{ hadoop.hdfs.user.name }}
@@ -17,7 +17,7 @@ hadoop_name_node_service_file_installed:
 hadoop_name_node_environment_file_installed:
   file.serialize:
     - name: /etc/sysconfig/hadoop_name_node
-    - dataset: {{ hadoop.hdfs.environment }}
+    - dataset: {{ hadoop.name_node.environment }}
     - formatter: configparser
     - require_in:
       - service: hadoop_name_node
