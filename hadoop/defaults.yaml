@@ -46,10 +46,10 @@ hadoop:
       name: hdfs
       gid: 3011
     config:
-      dfs:
-        namenode:
-          name:
-            dir: '/var/run/hadoop/hdfs/name_node/'
+      #dfs:
+      #  namenode:
+      #    name:
+      #      dir: '/var/run/hadoop/hdfs/name_node/'
   yarn:
     user:
       name: yarn
@@ -65,16 +65,16 @@ hadoop:
             hostname: '0.0.0.0:3001'
   name_node:
     port: 3000
-    hdfs:
-      config:
-        dfs:
-          namenode:
-            name:
-              dir: '/var/run/hadoop/NameNode'
+    #hdfs:
+    #  config:
+    #    dfs:
+    #      namenode:
+    #        name:
+    #          dir: '/var/run/hadoop/NameNode'
   data_node:
     hdfs:
       config:
-        dfs:
-          namenode:
-            name:
-              dir: '/var/run/hadoop/DataNode'
+        configuration:
+          - property:
+              name: 'dfs.namenode.name.dir'
+              value: '/var/run/hadoop/hdfs/DataNode/'

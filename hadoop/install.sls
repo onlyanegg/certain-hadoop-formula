@@ -25,7 +25,7 @@
 
 hadoop_archive_extracted:
   archive.extracted:
-    - name: /opt/hadoop-{{ hadoop.version }}
+    - name: /opt
     - source: {{ mirrors }}
     - source_hash: {{ checksum }}
 
