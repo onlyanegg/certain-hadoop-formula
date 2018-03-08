@@ -23,11 +23,21 @@
 {%- endfor %}
 {%- set checksum = checksums[0] %}
 
+hadoop_group_present:
+  group.present:
+    - name: {{ hadoop.group.name }}
+    - gid: {{ hadoop.group.gid }}
+
 hadoop_archive_extracted:
   archive.extracted:
     - name: /opt
     - source: {{ mirrors }}
     - source_hash: {{ checksum }}
+    - user: root
+    - group: {{ hadoop.group.name }}
+  file.directory:
+    - name: /opt/hadoop-{{ hadoop.version }}
+    - dir_mode: 775
 
 hadoop_dir_symlinked:
   file.symlink:
@@ -35,3 +45,9 @@ hadoop_dir_symlinked:
     - target: /opt/hadoop-{{ hadoop.version }}
     - onchanges:
       - archive: hadoop_archive_extracted
+
+hadoop_log4j_properties_installed:
+  file.managed:
+    - name: /etc/hadoop/log4j.properties
+    - source: salt://hadoop/files/log4j.properties
+    - template: jinja
