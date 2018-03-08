@@ -3,17 +3,9 @@
 {%- set hadoop_grains = salt.grains.get('hadoop', {}) %}
 
 {%- set hadoop = {} %}
-{%- set default_files = salt.file.readdir(
-    '/var/cache/salt/minion/files/{}/hadoop/defaults'.format(
-      salt.config.get('environment')
-    )
-  )
-%}
-{%- for file in default_files %}
-  {%- if file not in ['.', '..'] %}
-    {%- import_yaml 'hadoop/defaults/{}'.format(file) as defaults %}
-    {%- do salt.slsutil.update(hadoop, defaults) %}
-  {%- endif %}
+{%- for defaults in ['hadoop', 'log4j'] %}
+  {%- import_yaml 'hadoop/defaults/{}.yaml'.format(defaults) as defaults %}
+  {%- do salt.slsutil.update(hadoop, defaults) %}
 {%- endfor %}
 
 {#{%- set hadoop = hadoop_defaults.hadoop %}#}
