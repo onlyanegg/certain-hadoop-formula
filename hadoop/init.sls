@@ -1,5 +1,5 @@
 include:
-  - .download
+  - .install
 {%- if grains.id == salt['sdb.get']('sdb://hadoop/name_node') %}
   - .name_node
 {%- elif grains.id == salt['sdb.get']('sdb://hadoop/resource_manager') %}
