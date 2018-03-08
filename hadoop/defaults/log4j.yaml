@@ -189,7 +189,7 @@ hadoop:
     #
     # Use following logger to send summary to separate file defined by
     # hadoop.mapreduce.jobsummary.log.file :
-    '# hadoop.mapreduce.jobsummary.logger: INFO,JSA'
+    # hadoop.mapreduce.jobsummary.logger: INFO,JSA'
     #
     hadoop.mapreduce.jobsummary.logger: '${hadoop.root.logger}'
     hadoop.mapreduce.jobsummary.log.file: 'hadoop-mapreduce.jobsummary.log'
