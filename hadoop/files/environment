@@ -1,0 +1,3 @@
+{% for key, val in environment.iteritems() -%}
+{{ key }}={{ val }}
+{%- endfor %}
