@@ -45,11 +45,9 @@ hadoop:
     group:
       name: hdfs
       gid: 3011
+    environment:
+      JAVA_HOME: /usr/lib/java
     config: {}
-      #dfs:
-      #  namenode:
-      #    name:
-      #      dir: '/var/run/hadoop/hdfs/name_node/'
   yarn:
     user:
       name: yarn
@@ -57,20 +55,19 @@ hadoop:
     group:
       name: yarn
       gid: 3012
-  resource_manager:
-    yarn:
-      config:
-        yarn:
-          resourcemanager:
-            hostname: '0.0.0.0:3001'
+    environment:
+      JAVA_HOME: /usr/lib/java
   name_node:
+    service:
+      name: hadoop_name_node
+      description: Hadoop Distributed Filesystem NameNode Service
     port: 3000
-    #hdfs:
-    #  config:
-    #    dfs:
-    #      namenode:
-    #        name:
-    #          dir: '/var/run/hadoop/NameNode'
+    hdfs:
+      config:
+        configuration:
+          - property:
+              name: dfs.namenode.name.dir
+              value: '/var/run/hadoop/NameNode'
   data_node:
     hdfs:
       config:
@@ -78,3 +75,11 @@ hadoop:
           - property:
               name: 'dfs.namenode.name.dir'
               value: '/var/run/hadoop/hdfs/DataNode/'
+  resource_manager:
+    yarn:
+      config:
+        configuration:
+          - property:
+              name: resourcemanager.hostname
+              value: '0.0.0.0:3001'
+  node_manager:

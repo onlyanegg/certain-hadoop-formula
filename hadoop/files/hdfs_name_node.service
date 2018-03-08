@@ -1,0 +1,16 @@
+[Unit]
+Description=Hadoop Distributed Filesystem NameNode Service
+After=network-online.target
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/sysconfig/hdfs_name_node
+User={{ user }}
+Group={{ group }}
+
+TimeoutStopSec=10
+Restart=always
+RestartSec=2
+
+ExecStart=/opt/hadoop/bin/hdfs --config /etc/hadoop --daemon start namenode
+ExecStop=/opt/hadoop/bin/hdfs --config /etc/hadoop --daemon stop namenode
