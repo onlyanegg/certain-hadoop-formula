@@ -6,6 +6,8 @@
 {%- for defaults in ['hadoop', 'log4j'] %}
   {%- import_yaml 'hadoop/defaults/{}.yaml'.format(defaults) as defaults %}
   {%- do salt.slsutil.update(hadoop, defaults) %}
+# hadoop: {{ hadoop }}
+
 {%- endfor %}
 
 {#{%- set hadoop = hadoop_defaults.hadoop %}#}
