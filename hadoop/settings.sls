@@ -2,10 +2,10 @@
 {%- set hadoop_pillar = salt.pillar.get('hadoop', {}) %}
 {%- set hadoop_grains = salt.grains.get('hadoop', {}) %}
 
-{%- set hadoop_defualts = {} %}
+{%- set hadoop_defaults = {} %}
 {%- for defaults in ['hadoop', 'log4j'] %}
   {%- import_yaml 'hadoop/defaults/{}.yaml'.format(defaults) as defaults %}
-  {%- do salt.slsutil.update(hadoop_defaulas, defaults) %}
+  {%- do salt.slsutil.update(hadoop_defaults, defaults) %}
 # hadoop: {{ hadoop }}
 
 {%- endfor %}
