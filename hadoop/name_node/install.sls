@@ -14,17 +14,17 @@ hadoop_name_node_service_file_installed:
         user: {{ hadoop.hdfs.user.name }}
         group: {{ hadoop.hdfs.group.name }}
     - require_in:
-      - service: hadoop_name_node
+      - service: hdfs_name_node
 
 hadoop_name_node_environment_file_installed:
   file.managed:
-    - name: /etc/sysconfig/hadoop_name_node
+    - name: /etc/sysconfig/hdfs_name_node
     - source: salt://hadoop/files/environment
     - template: jinja
     - context:
         environment: {{ hadoop.name_node.environment }}
     - require_in:
-      - service: hadoop_name_node
+      - service: hdfs_name_node
 
 {#
 #
