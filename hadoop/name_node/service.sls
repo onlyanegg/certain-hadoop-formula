@@ -2,5 +2,5 @@
 
 hadoop_name_node_service:
   service.running:
-    - name: hadoop_name_node
+    - name: hdfs_name_node
     - enable: True
