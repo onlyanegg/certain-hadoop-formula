@@ -62,6 +62,8 @@ hadoop:
       name: hadoop_name_node
       description: Hadoop Distributed Filesystem NameNode Service
     port: 3000
+    environment:
+      JAVA_HOME: /usr/lib/java
     hdfs:
       config:
         configuration:
