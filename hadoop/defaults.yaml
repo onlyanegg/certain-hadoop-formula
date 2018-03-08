@@ -45,7 +45,7 @@ hadoop:
     group:
       name: hdfs
       gid: 3011
-    config:
+    config: {}
       #dfs:
       #  namenode:
       #    name:
