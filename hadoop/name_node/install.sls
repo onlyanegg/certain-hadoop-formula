@@ -10,7 +10,7 @@ hadoop_name_node_service_file_installed:
     - template: jinja
     - context:
         user: {{ hadoop.hdfs.user.name }}
-        group: {{ hadoop.hdfs.user.group }}
+        group: {{ hadoop.hdfs.group.name }}
     - require_in:
       - service: hadoop_name_node
 
