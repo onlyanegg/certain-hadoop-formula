@@ -73,6 +73,9 @@ hadoop:
           - property:
               name: dfs.namenode.name.dir
               value: '/var/run/hadoop/NameNode'
+          #- property:
+          #    name: dfs.datanode.data.dir
+          #    value: '/data02'
   data_node:
     hdfs:
       config:
