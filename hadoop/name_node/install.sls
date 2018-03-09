@@ -12,7 +12,7 @@ include:
     - template: jinja
     - context:
         user: {{ hadoop.hdfs.user.name }}
-        group: {{ hadoop.hdfs.group.name }}
+        group: {{ hadoop.group.name }}
     - require_in:
       - service: {{ hadoop.name_node.service.name }}
 
