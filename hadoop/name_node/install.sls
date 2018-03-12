@@ -43,8 +43,8 @@ include:
 
 {%- set name_dir = [hadoop.name_node.environment.PWD] %}
 {%- for property in hadoop.name_node.hdfs.config.configuration %}
-  {%- if property.name == 'dfs.namenode.name.dir' %}
-    {%- do name_dir.append(property.value) %}
+  {%- if property.property.name == 'dfs.namenode.name.dir' %}
+    {%- do name_dir.append(property.property.value) %}
   {%- endif %}
 {%- endfor %}
 {{ hadoop.name_node.service.name }}_name_dir_installed:
