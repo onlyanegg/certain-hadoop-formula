@@ -7,6 +7,7 @@ Type=simple
 EnvironmentFile=/etc/sysconfig/hdfs_name_node
 User={{ user }}
 Group={{ group }}
+CurrentDirectory=${PWD}
 
 TimeoutStopSec=10
 Restart=always

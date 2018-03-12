@@ -67,12 +67,13 @@ hadoop:
     port: 3000
     environment:
       JAVA_HOME: /usr/lib/java
+      PWD: /var/db/hadoop
     hdfs:
       config:
         configuration:
           - property:
               name: dfs.namenode.name.dir
-              value: '/var/run/hadoop/NameNode'
+              value: 'hadoop/NameNode'
           #- property:
           #    name: dfs.datanode.data.dir
           #    value: '/data02'

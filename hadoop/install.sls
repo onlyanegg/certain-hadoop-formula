@@ -51,3 +51,10 @@ hadoop_log4j_properties_installed:
     - name: /etc/hadoop/log4j.properties
     - source: salt://hadoop/files/log4j.properties
     - template: jinja
+
+hadoop_logs_dir_installed:
+  file.directory:
+    - name: {{ hadoop.log_dir | default('/opt/hadoop/logs') }}
+    - user: root
+    - group: {{ hadoop.group.name }}
+    - mode: 775
