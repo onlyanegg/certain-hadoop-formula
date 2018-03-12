@@ -73,7 +73,7 @@ hadoop:
         configuration:
           - property:
               name: dfs.namenode.name.dir
-              value: 'hadoop/NameNode'
+              value: 'hdfs/name'
           #- property:
           #    name: dfs.datanode.data.dir
           #    value: '/data02'
