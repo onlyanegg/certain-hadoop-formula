@@ -26,7 +26,7 @@ include:
     - require_in:
       - service: {{ hadoop.name_node.service.name }}
 
-{#
+{#-
 #
 # I think I'd like for this to eventually be handled by a serializer
 #
