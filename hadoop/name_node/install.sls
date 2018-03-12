@@ -13,7 +13,7 @@ include:
     - context:
         user: {{ hadoop.hdfs.user.name }}
         group: {{ hadoop.group.name }}
-    - require_in:
+    - watch_in:
       - service: {{ hadoop.name_node.service.name }}
 
 {{ hadoop.name_node.service.name }}_environment_file_installed:
@@ -23,7 +23,7 @@ include:
     - template: jinja
     - context:
         environment: {{ hadoop.name_node.environment }}
-    - require_in:
+    - watch_in:
       - service: {{ hadoop.name_node.service.name }}
 
 {#-
@@ -37,7 +37,7 @@ include:
 #    - formatter: configparser
 #    - context:
 #        environment: {{ hadoop.name_node.environment }}
-#    - require_in:
+#    - watch_in:
 #      - service: {{ hadoop.name_node.service.name }}
 #}
 
