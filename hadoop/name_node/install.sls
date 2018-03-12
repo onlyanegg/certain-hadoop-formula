@@ -41,15 +41,15 @@ include:
 #      - service: {{ hadoop.name_node.service.name }}
 #}
 
-{%- set name_dir = hadoop.name_node.environment.PWD %}
+{%- set name_dir = [hadoop.name_node.environment.PWD] %}
 {%- for property in hadoop.name_node.hdfs.config.configuration %}
   {%- if property.name == 'dfs.namenode.name.dir' %}
-    {%- do name_dir = name_dir ~ property.value %}
+    {%- do name_dir.append(property.value) %}
   {%- endif %}
 {%- endfor %}
 {{ hadoop.name_node.service.name }}_name_dir_installed:
   file.directory:
-    - name: {{ name_dir }}
+    - name: {{ '/'.join(name_dir) }}
     - user: {{ hadoop.hdfs.user.name }}
     - group: {{ hadoop.group.name }}
     - makedirs: True
