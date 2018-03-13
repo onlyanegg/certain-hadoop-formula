@@ -65,9 +65,9 @@ hadoop:
       name: hdfs_name_node
       description: Hadoop Distributed Filesystem NameNode Service
     port: 3000
+    pwd: /var/db/hadoop
     environment:
       JAVA_HOME: /usr/lib/java
-      PWD: /var/db/hadoop
     hdfs:
       config:
         configuration:
