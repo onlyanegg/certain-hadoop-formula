@@ -6,4 +6,7 @@ Known Issues:
   any subdirectory of `/var` which is really where they should be. To work
   around this, we can set the current working directory in the systemd
   service file as `CurrentDirectory` and then specify a relative directory
-  for `dfs.namenode.name.dir`
+  for `dfs.namenode.name.dir`.
+
+  NOTE: This is still broken, because the format command doesn't take
+  into account the service's working directory

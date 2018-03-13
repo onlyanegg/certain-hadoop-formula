@@ -3,7 +3,7 @@ Description=Hadoop YARN ResourceManager Service
 After=network-online.target
 
 [Service]
-Type=simple
+Type=forking
 EnvironmentFile=/etc/sysconfig/yarn_resource_manager
 User={{ user }}
 Group={{ group }}

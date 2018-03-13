@@ -3,7 +3,7 @@ Description=Hadoop Distributed Filesystem DataNode Service
 After=network-online.target
 
 [Service]
-Type=simple
+Type=forking
 EnvironmentFile=/etc/sysconfig/hdfs_data_node
 User={{ user }}
 Group={{ group }}

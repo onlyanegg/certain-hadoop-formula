@@ -3,7 +3,7 @@ Description=Hadoop YARN NodeManager Service
 After=network-online.target
 
 [Service]
-Type=simple
+Type=forking
 EnvironmentFile=/etc/sysconfig/yarn_node_manager
 User={{ user }}
 Group={{ group }}

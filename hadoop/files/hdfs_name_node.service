@@ -3,11 +3,10 @@ Description=Hadoop Distributed Filesystem NameNode Service
 After=network-online.target
 
 [Service]
-Type=simple
+Type=forking
 EnvironmentFile=/etc/sysconfig/hdfs_name_node
 User={{ user }}
 Group={{ group }}
-WorkingDirectory={{ pwd }}
 
 TimeoutStopSec=10
 Restart=always

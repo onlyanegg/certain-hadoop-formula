@@ -13,7 +13,6 @@ include:
     - context:
         user: {{ hadoop.hdfs.user.name }}
         group: {{ hadoop.group.name }}
-        pwd: {{ hadoop.name_node.pwd }}
     - watch_in:
       - service: {{ hadoop.name_node.service.name }}
 
@@ -42,7 +41,7 @@ include:
 #      - service: {{ hadoop.name_node.service.name }}
 #}
 
-{%- set name_dir = [hadoop.name_node.pwd] %}
+{%- set name_dir = [] %}
 {%- for property in hadoop.name_node.hdfs.config.configuration %}
   {%- if property.property.name == 'dfs.namenode.name.dir' %}
     {%- do name_dir.append(property.property.value) %}
@@ -50,7 +49,7 @@ include:
 {%- endfor %}
 {{ hadoop.name_node.service.name }}_name_dir_installed:
   file.directory:
-    - name: {{ '/'.join(name_dir) }}
+    - name: {{ name_dir[0] }}
     - user: {{ hadoop.hdfs.user.name }}
     - group: {{ hadoop.group.name }}
     - makedirs: True
