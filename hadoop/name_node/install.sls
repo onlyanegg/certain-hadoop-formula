@@ -42,7 +42,7 @@ include:
 #      - service: {{ hadoop.name_node.service.name }}
 #}
 
-{%- set name_dir = [hadoop.name_node.environment.PWD] %}
+{%- set name_dir = [hadoop.name_node.pwd] %}
 {%- for property in hadoop.name_node.hdfs.config.configuration %}
   {%- if property.property.name == 'dfs.namenode.name.dir' %}
     {%- do name_dir.append(property.property.value) %}
