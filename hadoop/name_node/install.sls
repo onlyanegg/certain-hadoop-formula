@@ -13,7 +13,7 @@ include:
     - context:
         user: {{ hadoop.hdfs.user.name }}
         group: {{ hadoop.group.name }}
-        pwd: {{ pwd }}
+        pwd: {{ hadoop.name_node.pwd }}
     - watch_in:
       - service: {{ hadoop.name_node.service.name }}
 
