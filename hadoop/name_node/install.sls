@@ -44,7 +44,7 @@ include:
 {%- set name_dir = [] %}
 {%- for property in hadoop.name_node.hdfs.config.configuration %}
   {%- if property.property.name == 'dfs.namenode.name.dir' %}
-    {%- do name_dir.append(property.property.value) %}
+    {%- do name_dir.append(property.property.value.strip('file://')) %}
   {%- endif %}
 {%- endfor %}
 {{ hadoop.name_node.service.name }}_name_dir_installed:
