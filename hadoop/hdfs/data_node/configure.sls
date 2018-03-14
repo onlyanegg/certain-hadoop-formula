@@ -1,6 +1,6 @@
 {% from 'hadoop/settings.sls' import hadoop with context -%}
 
-hadoop_hdfs-site.xml_serialized:
+hadoop_hdfs_config_serialized:
   file.serialize:
     - name: /etc/hadoop/hdfs-site.xml
     - dataset: {{ salt.slsutil.merge(hadoop.hdfs.config, hadoop.data_node.hdfs.config) }}
