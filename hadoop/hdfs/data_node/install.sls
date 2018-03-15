@@ -41,15 +41,15 @@ include:
 #      - service: {{ hadoop.data_node.service.name }}
 #}
 
-{%- set name_dir = [] %}
+{%- set data_dir = [] %}
 {%- for property in hadoop.data_node.hdfs.config.configuration %}
-  {%- if property.property.name == 'dfs.namenode.name.dir' %}
-    {%- do name_dir.append(property.property.value.replace('file://', '')) %}
+  {%- if property.property.name == 'dfs.datanode.data.dir' %}
+    {%- do data_dir.append(property.property.value.replace('file://', '')) %}
   {%- endif %}
 {%- endfor %}
-{{ hadoop.data_node.service.name }}_name_dir_installed:
+{{ hadoop.data_node.service.name }}_data_dir_installed:
   file.directory:
-    - name: {{ name_dir[0] }}
+    - name: {{ data_dir[0] }}
     - user: {{ hadoop.hdfs.user.name }}
     - group: {{ hadoop.group.name }}
     - makedirs: True

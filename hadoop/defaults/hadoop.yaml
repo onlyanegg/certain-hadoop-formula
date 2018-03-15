@@ -60,6 +60,7 @@ hadoop:
       gid: 3013
     environment:
       JAVA_HOME: /usr/lib/java
+    config: {}
   name_node:
     service:
       name: hdfs_name_node
@@ -77,12 +78,14 @@ hadoop:
           #    name: dfs.datanode.data.dir
           #    value: '/data02'
   data_node:
+    service:
+      name: hdfs_data_node
     hdfs:
       config:
         configuration:
           - property:
-              name: 'dfs.namenode.name.dir'
-              value: '/var/run/hadoop/hdfs/DataNode/'
+              name: 'dfs.datanode.data.dir'
+              value: 'file:///var/db/hadoop/hdfs/data'
   resource_manager:
     yarn:
       config:

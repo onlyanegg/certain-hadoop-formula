@@ -1,7 +1,7 @@
 {%- if grains.id == salt['sdb.get']('sdb://hadoop/resource_manager') %}
-  {%- set role = 'name_node' %}
+  {%- set role = 'resource_manager' %}
 {%- else %}
-  {%- set role = 'data_node' %}
+  {%- set role = 'node_manager' %}
 {%- endif -%}
 
 include:
