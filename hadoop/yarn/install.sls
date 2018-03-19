@@ -1,5 +1,8 @@
 {% from 'hadoop/settings.sls' import hadoop with context -%}
 
+include:
+  - ..install
+
 hadoop_yarn_group_present:
   group.present:
     - name: {{ hadoop.yarn.group.name }}
@@ -10,5 +13,9 @@ hadoop_yarn_user_present:
     - name: {{ hadoop.yarn.user.name }}
     - uid: {{ hadoop.yarn.user.uid }}
     - gid_from_name: True
+    - createhome: False
+    - groups:
+      - {{ hadoop.group.name }}
     - require:
+      - group: {{ hadoop.group.name }}
       - group: {{ hadoop.yarn.group.name }}

@@ -41,6 +41,8 @@ hadoop:
   group:
     name: hadoop
     gid: 3011
+  environment:
+    JAVA_HOME: /usr/lib/java
   hdfs:
     user:
       name: hdfs
@@ -48,8 +50,7 @@ hadoop:
     group:
       name: hdfs
       gid: 3012
-    environment:
-      JAVA_HOME: /usr/lib/java
+    environment: {}
     config: {}
   yarn:
     user:
@@ -58,16 +59,14 @@ hadoop:
     group:
       name: yarn
       gid: 3013
-    environment:
-      JAVA_HOME: /usr/lib/java
+    environment: {}
     config: {}
   name_node:
     service:
       name: hdfs_name_node
       description: Hadoop Distributed Filesystem NameNode Service
     port: 3000
-    environment:
-      JAVA_HOME: /usr/lib/java
+    environment: {}
     hdfs:
       config:
         configuration:
@@ -80,6 +79,7 @@ hadoop:
   data_node:
     service:
       name: hdfs_data_node
+    environment: {}
     hdfs:
       config:
         configuration:
@@ -87,10 +87,22 @@ hadoop:
               name: 'dfs.datanode.data.dir'
               value: 'file:///var/db/hadoop/hdfs/data'
   resource_manager:
+    service:
+      name: yarn_resource_manager
+    environment: {}
     yarn:
       config:
         configuration:
           - property:
-              name: resourcemanager.hostname
+              name: 'yarn.resourcemanager.hostname'
               value: '0.0.0.0:3001'
   node_manager:
+    service:
+      name: yarn_node_manager
+    environment: {}
+    yarn:
+      config:
+        configuration: []
+          #- property:
+          #    name: 'yarn.nodemanager.local-dirs'
+          #    value: 'file:///var/db/hadoop/yarn/nm-local-dir'
