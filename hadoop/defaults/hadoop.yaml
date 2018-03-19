@@ -52,6 +52,29 @@ hadoop:
       gid: 3012
     environment: {}
     config: {}
+    name_node:
+      service:
+        name: hdfs_name_node
+        description: Hadoop Distributed Filesystem NameNode Service
+      port: 3000
+      environment: {}
+      config:
+        configuration:
+          - property:
+              name: dfs.namenode.name.dir
+              value: 'file:///var/db/hadoop/hdfs/name'
+          #- property:
+          #    name: dfs.datanode.data.dir
+          #    value: '/data02'
+    data_node:
+      service:
+        name: hdfs_data_node
+      environment: {}
+      config:
+        configuration:
+          - property:
+              name: 'dfs.datanode.data.dir'
+              value: 'file:///var/db/hadoop/hdfs/data'
   yarn:
     user:
       name: yarn
@@ -61,46 +84,19 @@ hadoop:
       gid: 3013
     environment: {}
     config: {}
-  name_node:
-    service:
-      name: hdfs_name_node
-      description: Hadoop Distributed Filesystem NameNode Service
-    port: 3000
-    environment: {}
-    hdfs:
-      config:
-        configuration:
-          - property:
-              name: dfs.namenode.name.dir
-              value: 'file:///var/db/hadoop/hdfs/name'
-          #- property:
-          #    name: dfs.datanode.data.dir
-          #    value: '/data02'
-  data_node:
-    service:
-      name: hdfs_data_node
-    environment: {}
-    hdfs:
-      config:
-        configuration:
-          - property:
-              name: 'dfs.datanode.data.dir'
-              value: 'file:///var/db/hadoop/hdfs/data'
-  resource_manager:
-    service:
-      name: yarn_resource_manager
-    environment: {}
-    yarn:
+    resource_manager:
+      service:
+        name: yarn_resource_manager
+      environment: {}
       config:
         configuration:
           - property:
               name: 'yarn.resourcemanager.hostname'
               value: '0.0.0.0:3001'
-  node_manager:
-    service:
-      name: yarn_node_manager
-    environment: {}
-    yarn:
+    node_manager:
+      service:
+        name: yarn_node_manager
+      environment: {}
       config:
         configuration: []
           #- property:
