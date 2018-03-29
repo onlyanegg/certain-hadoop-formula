@@ -16,7 +16,7 @@
     )
   )
 %}
-# {{ ret.body }}
+# {{ ret }}
 {#
 {%- for line in ret.body.split('\n') %}
   {%- if 'SHA1' in line %}
