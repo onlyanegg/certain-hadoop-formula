@@ -1,5 +1,10 @@
 hadoop:
-  version: 3.0.0
+  #version: 3.0.0
+  version: {{ 
+    salt['http.query'](
+      'https://dist.apache.org/repos/dist/release/hadoop/common/stable2'
+    ).body.split('-')[2]
+  }}
   source:
     # Checksums from Apache cannot be interpreted by Salt. When translate_sum
     # is True, this formula translates the checksums returned from an http
