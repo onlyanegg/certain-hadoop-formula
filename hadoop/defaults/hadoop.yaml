@@ -100,7 +100,7 @@ hadoop:
         configuration:
           - property:
               name: 'yarn.resourcemanager.hostname'
-              value: '0.0.0.0:3001'
+              value: '0.0.0.0'
     node_manager:
       service:
         name: yarn_node_manager
