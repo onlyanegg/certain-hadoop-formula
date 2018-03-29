@@ -3,7 +3,7 @@ hadoop:
   version: {{ 
     salt['http.query'](
       'https://dist.apache.org/repos/dist/release/hadoop/common/stable2'
-    ).body.split('-')[2]
+    ).body.split('-')[1]
   }}
   source:
     # Checksums from Apache cannot be interpreted by Salt. When translate_sum
