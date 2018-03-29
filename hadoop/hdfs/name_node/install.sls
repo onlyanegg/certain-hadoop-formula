@@ -3,51 +3,51 @@
 include:
   - .service
 
-# hadoop.name_node: {{ hadoop.name_node }}
+# hadoop.hdfs.name_node: {{ hadoop.hdfs.name_node }}
 
-{{ hadoop.name_node.service.name }}_service_file_installed:
+{{ hadoop.hdfs.name_node.service.name }}_service_file_installed:
   file.managed:
-    - name: /etc/systemd/system/{{ hadoop.name_node.service.name }}.service
-    - source: salt://hadoop/files/{{ hadoop.name_node.service.name }}.service
+    - name: /etc/systemd/system/{{ hadoop.hdfs.name_node.service.name }}.service
+    - source: salt://hadoop/files/{{ hadoop.hdfs.name_node.service.name }}.service
     - template: jinja
     - context:
         user: {{ hadoop.hdfs.user.name }}
         group: {{ hadoop.group.name }}
     - watch_in:
-      - service: {{ hadoop.name_node.service.name }}
+      - service: {{ hadoop.hdfs.name_node.service.name }}
 
-{{ hadoop.name_node.service.name }}_environment_file_installed:
+{{ hadoop.hdfs.name_node.service.name }}_environment_file_installed:
   file.managed:
-    - name: /etc/sysconfig/{{ hadoop.name_node.service.name }}
+    - name: /etc/sysconfig/{{ hadoop.hdfs.name_node.service.name }}
     - source: salt://hadoop/files/environment
     - template: jinja
     - context:
-        environment: {{ hadoop.name_node.environment }}
+        environment: {{ hadoop.hdfs.name_node.environment }}
     - watch_in:
-      - service: {{ hadoop.name_node.service.name }}
+      - service: {{ hadoop.hdfs.name_node.service.name }}
 
 {#-
 #
 # I think I'd like for this to eventually be handled by a serializer
 #
-#{{ hadoop.name_node.service.name }}_environment_file_installed:
+#{{ hadoop.hdfs.name_node.service.name }}_environment_file_installed:
 #  file.serialize:
-#    - name: /etc/sysconfig/{{ hadoop.name_node.service.name }}
-#    - dataset: {{ hadoop.name_node.environment }}
+#    - name: /etc/sysconfig/{{ hadoop.hdfs.name_node.service.name }}
+#    - dataset: {{ hadoop.hdfs.name_node.environment }}
 #    - formatter: configparser
 #    - context:
-#        environment: {{ hadoop.name_node.environment }}
+#        environment: {{ hadoop.hdfs.name_node.environment }}
 #    - watch_in:
-#      - service: {{ hadoop.name_node.service.name }}
+#      - service: {{ hadoop.hdfs.name_node.service.name }}
 #}
 
 {%- set name_dir = [] %}
-{%- for property in hadoop.name_node.hdfs.config.configuration %}
+{%- for property in hadoop.hdfs.name_node.config.configuration %}
   {%- if property.property.name == 'dfs.namenode.name.dir' %}
     {%- do name_dir.append(property.property.value.replace('file://', '')) %}
   {%- endif %}
 {%- endfor %}
-{{ hadoop.name_node.service.name }}_name_dir_installed:
+{{ hadoop.hdfs.name_node.service.name }}_name_dir_installed:
   file.directory:
     - name: {{ name_dir[0] }}
     - user: {{ hadoop.hdfs.user.name }}
