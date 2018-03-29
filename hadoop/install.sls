@@ -16,8 +16,6 @@
     )
   )
 %}
-# {{ ret }}
-{#
 {%- for line in ret.body.split('\n') %}
   {%- if 'SHA1' in line %}
     {%- do checksums.append(''.join(line.split()[3:]).lower()) %}
@@ -60,4 +58,3 @@ hadoop_logs_dir_installed:
     - user: root
     - group: {{ hadoop.group.name }}
     - mode: 775
-#}
