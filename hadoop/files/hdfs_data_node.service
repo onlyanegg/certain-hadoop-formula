@@ -12,5 +12,4 @@ TimeoutStopSec=10
 Restart=always
 RestartSec=2
 
-ExecStart=/opt/hadoop/bin/hdfs --config /etc/hadoop --daemon start datanode
-ExecStop=/opt/hadoop/bin/hdfs --config /etc/hadoop --daemon stop datanode
+ExecStart=/opt/hadoop/bin/hdfs --config /etc/hadoop datanode
