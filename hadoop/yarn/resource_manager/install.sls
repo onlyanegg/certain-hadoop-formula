@@ -47,18 +47,3 @@ include:
 #    - watch_in:
 #      - service: {{ hadoop.yarn.resource_manager.service.name }}
 #}
-
-{#-
-{%- set name_dir = [] %}
-{%- for property in hadoop.yarn.resource_manager.yarn.config.configuration %}
-  {%- if property.property.name == 'dfs.namenode.name.dir' %}
-    {%- do name_dir.append(property.property.value.replace('file://', '')) %}
-  {%- endif %}
-{%- endfor %}
-{{ hadoop.yarn.resource_manager.service.name }}_name_dir_installed:
-  file.directory:
-    - name: {{ name_dir[0] }}
-    - user: {{ hadoop.yarn.user.name }}
-    - group: {{ hadoop.group.name }}
-    - makedirs: True
-#}
