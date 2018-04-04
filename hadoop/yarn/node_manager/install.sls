@@ -47,10 +47,3 @@ include:
 #    - watch_in:
 #      - service: {{ hadoop.yarn.node_manager.service.name }}
 #}
-
-{{ hadoop.yarn.node_manager.service.name }}_name_dir_installed:
-  file.directory:
-    - name: {{ hadoop.yarn.node_manager.config['dfs.namenode.name.dir'].replace('file://', '') }}
-    - user: {{ hadoop.yarn.user.name }}
-    - group: {{ hadoop.group.name }}
-    - makedirs: True
