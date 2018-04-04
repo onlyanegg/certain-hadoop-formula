@@ -22,7 +22,14 @@ include:
     - source: salt://hadoop/files/environment
     - template: jinja
     - context:
-        environment: {{ hadoop.hdfs.name_node.environment }}
+        environment: {{
+          salt.slsutil.merge(
+            hadoop.environment, salt.slsutil.merge(
+              hadoop.hdfs.environment,
+              hadoop.hdfs.name_node.environment
+            )
+          )
+        }}
     - watch_in:
       - service: {{ hadoop.hdfs.name_node.service.name }}
 
