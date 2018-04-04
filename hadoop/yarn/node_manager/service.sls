@@ -1,6 +1,6 @@
 {% from 'hadoop/settings.sls' import hadoop with context -%}
 
-{{ hadoop.resource_manager.service.name }}_service:
+{{ hadoop.yarn.node_manager.service.name }}_service:
   service.running:
-    - name: {{ hadoop.resource_manager.service.name }}
+    - name: {{ hadoop.yarn.node_manager.service.name }}
     - enable: True

@@ -3,8 +3,8 @@
 hadoop_yarn_config_serialized:
   file.serialize:
     - name: /etc/hadoop/yarn-site.xml
-    - dataset: {{ salt.slsutil.merge(hadoop.yarn.config, hadoop.node_manager.yarn.config) }}
-    - formatter: xml_badgerfish
+    - dataset: {{ salt.slsutil.merge(hadoop.yarn.config, hadoop.yarn.node_manager.config) }}
+    - formatter: xml_hadoop
     - user: {{ hadoop.yarn.user.name }}
     - group: {{ hadoop.yarn.group.name }}
     - makedirs: True

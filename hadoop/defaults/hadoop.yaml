@@ -63,10 +63,11 @@ hadoop:
       port: 3000
       environment: {}
       config:
-        configuration:
-          - property:
-              name: dfs.namenode.name.dir
-              value: 'file:///var/db/hadoop/hdfs/name'
+        dfs.namenode.name.dir: 'file:///var/db/hadoop/hdfs/name'
+        #configuration:
+        #  - property:
+        #      name: dfs.namenode.name.dir
+        #      value: 'file:///var/db/hadoop/hdfs/name'
           #- property:
           #    name: dfs.datanode.data.dir
           #    value: '/data02'
@@ -75,10 +76,11 @@ hadoop:
         name: hdfs_data_node
       environment: {}
       config:
-        configuration:
-          - property:
-              name: 'dfs.datanode.data.dir'
-              value: 'file:///var/db/hadoop/hdfs/data'
+        dfs.datanode.data.dir: 'file:///var/db/hadoop/hdfs/data'
+        #configuration:
+        #  - property:
+        #      name: 'dfs.datanode.data.dir'
+        #      value: 'file:///var/db/hadoop/hdfs/data'
   yarn:
     user:
       name: yarn
@@ -88,19 +90,21 @@ hadoop:
       gid: 3013
     environment: {}
     config:
-      configuration:
-        - property:
-            name: 'yarn.resourcemanager.scheduler.class'
-            value: 'org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.FairScheduler'
+      yarn.resourcemanager.scheduler.class: 'org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.FairScheduler'
+      #configuration:
+      #  - property:
+      #      name: 'yarn.resourcemanager.scheduler.class'
+      #      value: 'org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.FairScheduler'
     resource_manager:
       service:
         name: yarn_resource_manager
       environment: {}
       config:
-        configuration:
-          - property:
-              name: 'yarn.resourcemanager.hostname'
-              value: '0.0.0.0'
+        yarn.resourcemanager.hostname: '0.0.0.0'
+        #configuration:
+        #  - property:
+        #      name: 'yarn.resourcemanager.hostname'
+        #      value: '0.0.0.0'
     node_manager:
       service:
         name: yarn_node_manager
