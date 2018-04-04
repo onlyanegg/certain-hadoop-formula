@@ -52,7 +52,7 @@ include:
 {{ hadoop.hdfs.data_node.service.name }}_data_dir_installed:
   file.directory:
     {#- name: {{ data_dir[0] }}#}
-    - name: {{ hadoop.hdfs.data_node.config['dfs.namenode.name.dir'] }}
+    - name: {{ hadoop.hdfs.data_node.config['dfs.datanode.data.dir'] }}
     - user: {{ hadoop.hdfs.user.name }}
     - group: {{ hadoop.group.name }}
     - makedirs: True
