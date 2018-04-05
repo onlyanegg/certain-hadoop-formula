@@ -1,7 +1,7 @@
 {% from 'hadoop/settings.sls' import hadoop with context -%}
 
 {%- set dynamic_config = {
-    'dfs.namenode.rpc-address': salt['sdb.get']('sdb://hadoop/name_node') ~ ':50070'
+    'dfs.namenode.rpc-address': salt.sdb.get('sdb://hadoop/name_node') ~ ':50070'
   }
 %}
 hadoop_hdfs_config_serialized:
@@ -10,7 +10,7 @@ hadoop_hdfs_config_serialized:
     - dataset: {{
         salt.slsutil.merge(hadoop.hdfs.config,
           salt.slsutil.merge(
-            hadoop.hdfs.data_node.config
+            hadoop.hdfs.data_node.config,
             dynamic_config
         )
       }}
