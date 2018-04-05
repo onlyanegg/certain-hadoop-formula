@@ -3,7 +3,7 @@ Description=Hadoop YARN ResourceManager Service
 After=network-online.target
 
 [Service]
-Type=forking
+Type=simple
 EnvironmentFile=/etc/sysconfig/yarn_resource_manager
 User={{ user }}
 Group={{ group }}
@@ -12,5 +12,4 @@ TimeoutStopSec=10
 Restart=always
 RestartSec=2
 
-ExecStart=/opt/hadoop/bin/yarn --config /etc/hadoop --daemon start resourcemanager
-ExecStop=/opt/hadoop/bin/yarn --config /etc/hadoop --daemon stop resourcemanager
+ExecStart=/opt/hadoop/bin/yarn --config /etc/hadoop resourcemanager

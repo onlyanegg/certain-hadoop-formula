@@ -3,7 +3,7 @@ Description=Hadoop YARN NodeManager Service
 After=network-online.target
 
 [Service]
-Type=forking
+Type=simple
 EnvironmentFile=/etc/sysconfig/yarn_node_manager
 User={{ user }}
 Group={{ group }}
@@ -12,5 +12,4 @@ TimeoutStopSec=10
 Restart=always
 RestartSec=2
 
-ExecStart=/opt/hadoop/bin/yarn --config /etc/hadoop --daemon start nodemanager
-ExecStop=/opt/hadoop/bin/yarn --config /etc/hadoop --daemon stop nodemanager
+ExecStart=/opt/hadoop/bin/yarn --config /etc/hadoop nodemanager
