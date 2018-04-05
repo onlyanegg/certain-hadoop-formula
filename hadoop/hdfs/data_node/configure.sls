@@ -1,6 +1,6 @@
 {% from 'hadoop/settings.sls' import hadoop with context -%}
 
-{%- dynamic_config = {
+{%- set dynamic_config = {
     'dfs.namenode.rpc-address': salt['sdb.get']('sdb://hadoop/name_node') ~ ':50070'
   }
 %}
