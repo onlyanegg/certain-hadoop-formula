@@ -12,6 +12,7 @@ hadoop_hdfs_config_serialized:
           salt.slsutil.merge(
             hadoop.hdfs.data_node.config,
             dynamic_config
+          )
         )
       }}
     - formatter: xml_hadoop
