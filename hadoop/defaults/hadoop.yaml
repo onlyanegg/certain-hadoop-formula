@@ -50,6 +50,7 @@ hadoop:
     gid: 3011
   environment:
     JAVA_HOME: /usr/lib/java
+  cluster_name: 'hadoop'
   hdfs:
     user:
       name: hdfs

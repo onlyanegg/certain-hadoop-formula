@@ -4,35 +4,20 @@
     'manage.up', tgt=hadoop.target, expr_form=hadoop.target_type
   )
 -%}
+{% set name_node = hadoop_nodes.pop(0) -%}
 
-{# This should return the same node every time, even after adding or removing
-#  boxes.
-#}
-{% set name_node = hadoop_nodes[0] -%}
-{% set resource_manager = hadoop_nodes[0] -%}
+configure_masters:
+  salt.state:
+    - name: hadoop.bootstrap.configure_masters
+    - tgt: {{ grains.id }}
 
-{% set ret = [] -%}
-{% do ret.append(salt['sdb.set']('sdb://hadoop/name_node', name_node)) -%}
-{% do ret.append(salt['sdb.set']('sdb://hadoop/resource_manager', resource_manager)) -%}
+bootstrap_name_node:
+  salt.state:
+    - name: hadoop.bootstrap.bootstrap
+    - tgt: {{ name_node }}
 
-{% if False in ret -%}
-hadoop_bootstrap_failed:
-  test.configurable_test_state:
-    - result: False
-    - comment: 'Failed to configure the Hadoop NameNode and ResourceManager. Is SDB available?'
-{% else -%}
-  {% set message = (
-      "Successfully configured the Hadoop NameNode and ResourceManager.\n"
-      "NameNode: {}\n" 
-      "ResourceManager: {}\n"
-    ).format(
-      salt['sdb.get']('sdb://hadoop/name_node'),
-      salt['sdb.get']('sdb://hadoop/resource_manager')
-    )
-  -%}
-hadoop_bootstrap_succeeded:
-  test.configurable_test_state:
-    - result: True
-    - comment: "{{ message }}"
-    - changes: False
-{%- endif %}
+bootstrap_others:
+  salt.state:
+    - name: hadoop
+    - tgt: {{ hadoop_nodes }}
+    - tgt_type: list
