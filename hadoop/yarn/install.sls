@@ -1,5 +1,6 @@
 {% from 'hadoop/settings.sls' import hadoop with context -%}
 
+{#
 include:
   - ..install
 
@@ -19,3 +20,4 @@ hadoop_yarn_user_present:
     - require:
       - group: {{ hadoop.group.name }}
       - group: {{ hadoop.yarn.group.name }}
+#}

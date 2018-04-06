@@ -16,7 +16,7 @@ hadoop_hdfs_config_serialized:
         )
       }}
     - formatter: xml_hadoop
-    - user: {{ hadoop.hdfs.user.name }}
-    - group: {{ hadoop.hdfs.group.name }}
+    - user: {{ hadoop.user.name }}
+    - group: {{ hadoop.group.name }}
     - makedirs: True
     - mode: 644

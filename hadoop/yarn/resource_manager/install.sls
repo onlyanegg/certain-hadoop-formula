@@ -11,7 +11,7 @@ include:
     - source: salt://hadoop/files/{{ hadoop.yarn.resource_manager.service.name }}.service
     - template: jinja
     - context:
-        user: {{ hadoop.yarn.user.name }}
+        user: {{ hadoop.user.name }}
         group: {{ hadoop.group.name }}
     - watch_in:
       - service: {{ hadoop.yarn.resource_manager.service.name }}

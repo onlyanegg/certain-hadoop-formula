@@ -1,5 +1,6 @@
 {% from 'hadoop/settings.sls' import hadoop with context -%}
 
+{#
 include:
   - ..install
 
@@ -10,8 +11,8 @@ hadoop_hdfs_group_present:
 
 hadoop_hdfs_user_present:
   user.present:
-    - name: {{ hadoop.hdfs.user.name }}
-    - uid: {{ hadoop.hdfs.user.uid }}
+    - name: {{ hadoop.user.name }}
+    - uid: {{ hadoop.user.uid }}
     - gid_from_name: True
     - createhome: False
     - groups:
@@ -19,3 +20,4 @@ hadoop_hdfs_user_present:
     - require:
       - group: {{ hadoop.group.name }}
       - group: {{ hadoop.hdfs.group.name }}
+#}

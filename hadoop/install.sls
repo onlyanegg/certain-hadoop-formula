@@ -28,6 +28,13 @@ hadoop_group_present:
     - name: {{ hadoop.group.name }}
     - gid: {{ hadoop.group.gid }}
 
+hadoop_user_present:
+  user.present:
+    - name: {{ hadoop.user.name }}
+    - uid: {{ hadoop.user.uid }}
+    - gid_from_name: True
+    - createhome: False
+
 hadoop_archive_extracted:
   archive.extracted:
     - name: /opt

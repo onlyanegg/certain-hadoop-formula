@@ -11,7 +11,7 @@ include:
     - source: salt://hadoop/files/{{ hadoop.hdfs.data_node.service.name }}.service
     - template: jinja
     - context:
-        user: {{ hadoop.hdfs.user.name }}
+        user: {{ hadoop.user.name }}
         group: {{ hadoop.group.name }}
     - watch_in:
       - service: {{ hadoop.hdfs.data_node.service.name }}
@@ -51,6 +51,6 @@ include:
 {{ hadoop.hdfs.data_node.service.name }}_data_dir_installed:
   file.directory:
     - name: {{ hadoop.hdfs.data_node.config['dfs.datanode.data.dir'].replace('file://', '') }}
-    - user: {{ hadoop.hdfs.user.name }}
+    - user: {{ hadoop.user.name }}
     - group: {{ hadoop.group.name }}
     - makedirs: True

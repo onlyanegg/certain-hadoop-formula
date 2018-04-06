@@ -42,11 +42,17 @@ hadoop:
       - http://www.trieuvan.com/apache/hadoop/common
   target: 'if101*'
   target_type: glob
+  user:
+    name: hadoop
+    uid: 3011
   group:
     name: hadoop
     gid: 3011
   environment:
     JAVA_HOME: /usr/lib/java
+  # Setting this optional parameter guarantees that both the YARN user and the
+  # HDFS user can write to the storage directory
+  storage_dir: '/var/db/hadoop'
   hdfs:
     user:
       name: hdfs
@@ -64,6 +70,7 @@ hadoop:
       environment: {}
       config:
         dfs.namenode.name.dir: 'file:///var/db/hadoop/hdfs/name'
+        #dfs.namenode.name.dir: {{ 'file://{}/hdfs/name'.format(storage_dir) }}
     data_node:
       service:
         name: hdfs_data_node
