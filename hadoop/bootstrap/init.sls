@@ -8,16 +8,16 @@
 
 configure_masters:
   salt.state:
-    - name: hadoop.bootstrap.configure_masters
+    - sls: hadoop.bootstrap.configure_masters
     - tgt: {{ grains.id }}
 
 bootstrap_name_node:
   salt.state:
-    - name: hadoop.bootstrap.bootstrap
+    - sls: hadoop.bootstrap.bootstrap
     - tgt: {{ name_node }}
 
 bootstrap_others:
   salt.state:
-    - name: hadoop
+    - sls: hadoop
     - tgt: {{ hadoop_nodes }}
     - tgt_type: list
