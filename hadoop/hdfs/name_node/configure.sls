@@ -3,7 +3,7 @@
 hadoop_hdfs_config_serialized:
   file.serialize:
     - name: /etc/hadoop/hdfs-site.xml
-    - dataset: {{ salt.slsutil.merge(hadoop.hdfs.config, hadoop.hdfs.name_node.config) }}
+    - dataset: {{ salt.slsutil.merge(hadoop.hdfs.config, hadoop.hdfs.name_node.config) | json }}
     - formatter: xml_hadoop
     - user: {{ hadoop.user.name }}
     - group: {{ hadoop.group.name }}
