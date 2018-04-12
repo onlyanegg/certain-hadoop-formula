@@ -7,8 +7,5 @@
 #   Maybe I can pass an argument to bootstrap or maybe hadoop/bootstrap.sls will be very similar
 #     to hadoop/init.sls, but it will inject this format command
 format_hdfs:
-  salt.function:
-    - name: cmd.run
-    - tgt: {{ hdfs_name_node }}
-    - arg:
-      - {{ 'hdfs --config /etc/hadoop -format {}'.format(hadoop.cluster_name) }}
+  cmd.run
+    - name: {{ 'hdfs --config /etc/hadoop -format {}'.format(hadoop.cluster_name) }}
