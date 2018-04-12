@@ -1,5 +1,6 @@
 {% from 'hadoop/settings.sls' import hadoop with context -%}
 
+# {{ hadoop.hdfs.data_node.config['dfs.data_node.data.dir'] }}
 {%- set dynamic_config = {
     'dfs.namenode.rpc-address': '{}:{}'.format(salt.sdb.get('sdb://hadoop/name_node'), 8020)
   }
