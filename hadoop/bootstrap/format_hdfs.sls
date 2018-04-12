@@ -8,4 +8,4 @@
 #     to hadoop/init.sls, but it will inject this format command
 format_hdfs:
   cmd.run
-    - name: {{ 'hdfs --config /etc/hadoop -format {}'.format(hadoop.cluster_name) }}
+    - name: "{{ 'hdfs --config /etc/hadoop -format {}'.format(hadoop.cluster_name) }}"
