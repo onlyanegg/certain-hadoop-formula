@@ -13,7 +13,7 @@ hadoop_hdfs_config_serialized:
             hadoop.hdfs.data_node.config,
             dynamic_config
           )
-        ) | str
+        ) | string
       }}
     - formatter: xml_hadoop
     - user: {{ hadoop.user.name }}
