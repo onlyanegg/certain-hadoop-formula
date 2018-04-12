@@ -6,10 +6,11 @@
 -%}
 {% set name_node = hadoop_nodes.pop(0) -%}
 
+# {{ grains.id }}
 configure_masters:
   salt.state:
     - sls: hadoop.bootstrap.configure_masters
-    - tgt: {{ grains.id }}
+    - tgt: 'mgmt101*'
 
 bootstrap_name_node:
   salt.state:
