@@ -15,6 +15,6 @@
 #     to hadoop/init.sls, but it will inject this format command
 format_hdfs:
   cmd.run:
-    - name: {{ '/opt/hadoop/bin/hdfs --config /etc/hadoop -format {}'.format(hadoop.cluster_name) }}
+    - name: {{ '/opt/hadoop/bin/hdfs --config /etc/hadoop namenode -format {}'.format(hadoop.cluster_name) }}
     - env:
       - JAVA_HOME: {{ environment.JAVA_HOME }}
