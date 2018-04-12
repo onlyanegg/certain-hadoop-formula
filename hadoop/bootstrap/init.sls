@@ -4,9 +4,13 @@
     'manage.up', tgt=hadoop.target, expr_form=hadoop.target_type
   )
 -%}
+# hadoop_nodes: {{ hadoop_nodes }}
 {% set name_node = hadoop_nodes.pop(0) -%}
 
 # {{ grains.id }}
+# hadoop_nodes: {{ hadoop_nodes }}
+# name_node: {{ name_node }}
+
 configure_masters:
   salt.state:
     - sls: hadoop.bootstrap.configure_masters
