@@ -4,12 +4,14 @@
     'manage.up', tgt=hadoop.target, expr_form=hadoop.target_type
   )
 -%}
-# hadoop_nodes: {{ hadoop_nodes }}
-{% set name_node = hadoop_nodes.pop(0) -%}
+{% set name_node = hadoop_nodes[0] -%}
+{% set other_nodes = hadoop_nodes[1:] %}
 
-# {{ grains.id }}
-# hadoop_nodes: {{ hadoop_nodes }}
-# name_node: {{ name_node }}
+install_dependencies:
+  salt.state:
+    - sls: hadoop.dependencies
+    - tgt: {{ hadoop_nodes }}
+    - tgt_type: list
 
 configure_masters:
   salt.state:
@@ -24,5 +26,5 @@ bootstrap_name_node:
 bootstrap_others:
   salt.state:
     - sls: hadoop
-    - tgt: {{ hadoop_nodes }}
+    - tgt: {{ other_nodes }}
     - tgt_type: list
