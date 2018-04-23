@@ -7,9 +7,9 @@
 salt:
   minion:
     hadoop:
-      driver: memcached
-      memcached.host: 10.0.1.3
-      memcached.port: 11211
+      driver: zookeeper
+      hosts:
+        - 10.0.1.3
 
 
 # Hadoop settings

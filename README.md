@@ -1,3 +1,7 @@
+A Salt formula to install hadoop
+
+Currently supports HDFS and YARN
+
 Known Issues:
 ------
 

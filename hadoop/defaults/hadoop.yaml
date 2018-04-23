@@ -68,7 +68,7 @@ hadoop:
       environment: {}
       config:
         dfs.namenode.name.dir: 'file:///var/db/hadoop/hdfs/name'
-        fs.defaultFS: 'hdfs://localhost:8020'
+        fs.defaultFS: 'hdfs://0.0.0.0:8020'
     data_node:
       service:
         name: hdfs_data_node
