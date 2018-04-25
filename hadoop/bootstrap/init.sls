@@ -1,7 +1,7 @@
 {% from 'hadoop/settings.sls' import hadoop with context -%}
 
 {% set hadoop_nodes = salt['saltutil.runner'](
-    'manage.up', tgt=hadoop.target, expr_form=hadoop.target_type
+    'manage.up', tgt=hadoop.target, tgt_type=hadoop.target_type
   )
 -%}
 {% set name_node = hadoop_nodes[0] -%}
@@ -10,8 +10,8 @@
 install_dependencies:
   salt.state:
     - sls: hadoop.dependencies
-    - tgt: {{ hadoop_nodes }}
-    - tgt_type: list
+    - tgt: {{ hadoop.target }}
+    - tgt_type: {{ hadoop.target_type }}
 
 configure_masters:
   salt.state:
