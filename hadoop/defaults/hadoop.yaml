@@ -41,7 +41,8 @@ hadoop:
       - http://www.gtlib.gatech.edu/pub/apache/hadoop/common
       - http://www.trieuvan.com/apache/hadoop/common
   target: 'hadoop*'
-  target_type: glob
+  target_type: 'glob'
+  target_function: 'network.get_hostname'
   user:
     name: hadoop
     uid: 3011

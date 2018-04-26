@@ -1,8 +1,15 @@
 {% from 'hadoop/settings.sls' import hadoop with context -%}
 
+{#
 {% set hadoop_nodes = salt['saltutil.runner'](
     'manage.up', tgt=hadoop.target, expr_form=hadoop.target_type
   )
+-%}
+#}
+
+{% set hadoop_nodes = salt['mine.get'](
+    fun=hadoop.target_function, tgt=hadoop.target, tgt_type=hadoop.target_type
+  ).values()
 -%}
 
 {# This should return the same node every time, even after adding or removing

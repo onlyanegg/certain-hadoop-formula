@@ -2,7 +2,8 @@
 # of the hadoop cluster requires dynamic configuration and requires each node
 # the cluster to know where the managers are. These values are kept in SDB. 
 #
-# The following pillar configures a memcached SDB store via the Salt formula
+# The following pillar configures a Zookeeper SDB store and the Salt mine via
+# the Salt formula.
 # https://github.com/saltstack-formulas/salt-formula
 salt:
   minion:
@@ -11,6 +12,10 @@ salt:
       hosts:
         - 10.0.1.3
 
+    # The minions' mine should be configured to send `hadoop.target_function`
+    # which defines the connection string for the NameNode and ResourceManager
+    mine_functions:
+      network.get_hostname: []
 
 # Hadoop settings
 hadoop:
