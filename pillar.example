@@ -7,78 +7,37 @@
 # https://github.com/saltstack-formulas/salt-formula
 salt:
   minion:
+
+    # Configure a Zookeeper SDB interface to store NameNode and ResourceManager
+    # connection strings
     hadoop:
       driver: zookeeper
       hosts:
         - 10.0.1.3
 
-    # The minions' mine should be configured to send `hadoop.target_function`
-    # which defines the connection string for the NameNode and ResourceManager
+    # Target the NameNode and ResourceManager by internal IP
     mine_functions:
-      network.get_hostname: []
+      internal_ip:
+        mine_function: 'network.interface_ip'
+        iface: 'eth0'
 
 # Hadoop settings
 hadoop:
   version: 3.0.0
   target: 'if101*'
-  target_type: glob
+  target_type: 'glob'
 
-  # core-site.xml - These config parameters apply to all roles
-  core:
+  # Specify a mine function which defines the connection string for the
+  # NameNode and ResourceManager
+  target_function: 'internal_ip'
 
   hdfs:
-    user:
-      name: hdfs
-      uid: 3011
-    group:
-      name: hdfs
-      gid: 3011
+    name_node:
 
-    # hdfs-site.xml - These config parameters apply to all roles
-    config:
-      dfs:
-        namenode:
-          name:
-            dir: '/var/run/hadoop/hdfs/name_node/'
-
-  yarn:
-    user:
-      name: yarn
-      uid: 3012
-    group:
-      name: yarn
-      gid: 3012
-
-  # Parameters specific to the ResourceManager role
-  resource_manager:
-    yarn:
-
-      # yarn-site.xml
+      # The following configuration parameters are part of hdfs-site.xml on the
+      # NameNode
       config:
-        yarn:
-          resourcemanager:
-            hostname: '0.0.0.0:3001'
 
-  # Parameters specific to the ResourceManager role
-  name_node:
-    port: 3000
-    hdfs:
-
-      # hdfs-site.xml
-      config:
-        dfs:
-          namenode:
-            name:
-              dir: '/var/run/hadoop/NameNode'
-
-  # Parameters specific to the ResourceManager role
-  data_node:
-    hdfs:
-      config:
-        dfs:
-          namenode:
-            name:
-              dir: '/var/run/hadoop/DataNode'
-
-  # Parameters specific to the ResourceManager role
-  node_manager:
+        # The NameNode trys to perform a reverse DNS lookup of DataNodes and
+        # treats failure as fatal by default
+        dfs.namenode.datanode.registration.ip-hostname-check: 'false'

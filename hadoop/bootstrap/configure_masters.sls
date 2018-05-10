@@ -7,6 +7,8 @@
 -%}
 #}
 
+# This may actually return a dictionary, which means that name_node and
+# resource_manager may be different on different invocations
 {% set hadoop_nodes = salt['mine.get'](
     fun=hadoop.target_function, tgt=hadoop.target, tgt_type=hadoop.target_type
   ).values()
