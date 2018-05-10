@@ -18,7 +18,7 @@
 %}
 {%- for line in ret.body.split('\n') %}
   {%- if 'SHA1' in line %}
-    {%- do checksums.append(''.join(line.split()[3:]).lower()) %}
+    {%- do checksums.append(''.join(line.split()[2:]).lower()) %}
   {%- endif %}
 {%- endfor %}
 {%- set checksum = checksums[0] %}
@@ -39,15 +39,15 @@ hadoop_archive_extracted:
   archive.extracted:
     - name: /opt
     - source: {{ mirrors }}
-    {#- source_hash: {{ checksum }}#}
-    - source_hash: {{ '{0}/hadoop-{1}/hadoop-{1}.tar.gz.sha256'.format(hadoop.source.sum,hadoop.version) }}
+    - source_hash: {{ checksum }}
+    {#- source_hash: {{ '{0}/hadoop-{1}/hadoop-{1}.tar.gz.sha256'.format(hadoop.source.sum,hadoop.version) }}#}
     - user: root
     - group: {{ hadoop.group.name }}
   file.directory:
     - name: /opt/hadoop-{{ hadoop.version }}
     - dir_mode: 775
 
-hadoop_dir_symlinked:
+hadoop_archive_symlinked:
   file.symlink:
     - name: /opt/hadoop
     - target: /opt/hadoop-{{ hadoop.version }}

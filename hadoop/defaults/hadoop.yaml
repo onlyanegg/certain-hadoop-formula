@@ -5,10 +5,6 @@ hadoop:
     ).body.split('-')[1]
   }}
   source:
-    # Checksums from Apache cannot be interpreted by Salt. When translate_sum
-    # is True, this formula translates the checksums returned from an http
-    # request to a valid format.
-    translate_sum: True
     sum: https://dist.apache.org/repos/dist/release/hadoop/common
     mirrors:
       - http://apache.claz.org/hadoop/common
@@ -40,9 +36,6 @@ hadoop:
       - http://supergsego.com/apache/hadoop/common
       - http://www.gtlib.gatech.edu/pub/apache/hadoop/common
       - http://www.trieuvan.com/apache/hadoop/common
-  target: 'hadoop*'
-  target_type: 'glob'
-  target_function: 'network.get_hostname'
   user:
     name: hadoop
     uid: 3011
@@ -53,46 +46,42 @@ hadoop:
     JAVA_HOME: /usr/lib/java
   cluster_name: 'hadoop'
   hdfs:
-    user:
-      name: hdfs
-      uid: 3012
-    group:
-      name: hdfs
-      gid: 3012
     environment: {}
     config: {}
     name_node:
+      target: 'namenode*'
+      target_type: 'glob'
+      endpoint_grain: 'fqdn'
       service:
         name: hdfs_name_node
-        description: Hadoop Distributed Filesystem NameNode Service
-      port: 3000
       environment: {}
       config:
         dfs.namenode.name.dir: 'file:///var/db/hadoop/hdfs/name'
         fs.defaultFS: 'hdfs://0.0.0.0:8020'
     data_node:
+      target: 'datanode*'
+      target_type: 'glob'
       service:
         name: hdfs_data_node
       environment: {}
       config:
         dfs.datanode.data.dir: 'file:///var/db/hadoop/hdfs/data'
   yarn:
-    user:
-      name: yarn
-      uid: 3013
-    group:
-      name: yarn
-      gid: 3013
     environment: {}
     config:
       yarn.resourcemanager.scheduler.class: 'org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.FairScheduler'
     resource_manager:
+      target: 'resourcemanager*'
+      target_type: 'glob'
+      endpoint_grain: 'fqdn'
       service:
         name: yarn_resource_manager
       environment: {}
       config:
-        yarn.resourcemanager.hostname: '0.0.0.0'
+        yarn.resourcemanager.bind-host: '0.0.0.0'
     node_manager:
+      target: 'nodemanager*'
+      target_type: 'glob'
       service:
         name: yarn_node_manager
       environment: {}

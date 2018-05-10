@@ -3,8 +3,6 @@
 include:
   - .service
 
-# hadoop.hdfs.data_node: {{ hadoop.hdfs.data_node }}
-
 {{ hadoop.hdfs.data_node.service.name }}_service_file_installed:
   file.managed:
     - name: /etc/systemd/system/{{ hadoop.hdfs.data_node.service.name }}.service
@@ -23,30 +21,14 @@ include:
     - template: jinja
     - context:
         environment: {{
-          salt.slsutil.merge(
-            hadoop.environment, salt.slsutil.merge(
-              hadoop.hdfs.environment,
-              hadoop.hdfs.data_node.environment
-            )
-          )
+          salt.slsutil.merge_all([
+            hadoop.environment,
+            hadoop.hdfs.environment,
+            hadoop.hdfs.data_node.environment
+          ])
         }}
     - watch_in:
       - service: {{ hadoop.hdfs.data_node.service.name }}
-
-{#-
-#
-# I think I'd like for this to eventually be handled by a serializer
-#
-#{{ hadoop.hdfs.data_node.service.name }}_environment_file_installed:
-#  file.serialize:
-#    - name: /etc/sysconfig/{{ hadoop.hdfs.data_node.service.name }}
-#    - dataset: {{ hadoop.hdfs.data_node.environment }}
-#    - formatter: configparser
-#    - context:
-#        environment: {{ hadoop.hdfs.data_node.environment }}
-#    - watch_in:
-#      - service: {{ hadoop.hdfs.data_node.service.name }}
-#}
 
 {{ hadoop.hdfs.data_node.service.name }}_data_dir_installed:
   file.directory:
@@ -54,3 +36,5 @@ include:
     - user: {{ hadoop.user.name }}
     - group: {{ hadoop.group.name }}
     - makedirs: True
+    - require_in:
+      - service: {{ hadoop.hdfs.data_node.service.name }}

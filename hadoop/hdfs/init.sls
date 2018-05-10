@@ -1,17 +1,16 @@
 {% from 'hadoop/settings.sls' import hadoop with context -%}
 
-{%- set is_name_node = 
-  salt['mine.get'](fun=hadoop.target_function, tgt=grains.id)[grains.id] ==
-  salt['sdb.get']('sdb://hadoop/name_node')
-%}
-
-{%- if is_name_node %}
-  {%- set role = 'name_node' %}
-{%- else %}
-  {%- set role = 'data_node' %}
-{%- endif -%}
+{%- set name_node = hadoop.hdfs.name_node %}
+{%- set data_node = hadoop.hdfs.data_node %}
 
 include:
   - .install
   - .configure
-  - .{{ role }}
+
+{%- if salt['match.{}'.format(data_node.target_type)](data_node.target) %}
+  - .name_node
+{%- endif %}
+
+{%- if salt['match.{}'.format(data_node.target_type)](data_node.target) %}
+  - .data_node
+{%- endif %}

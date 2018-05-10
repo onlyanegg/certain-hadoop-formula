@@ -3,8 +3,6 @@
 include:
   - .service
 
-# hadoop.hdfs.name_node: {{ hadoop.hdfs.name_node }}
-
 {{ hadoop.hdfs.name_node.service.name }}_service_file_installed:
   file.managed:
     - name: /etc/systemd/system/{{ hadoop.hdfs.name_node.service.name }}.service
@@ -23,30 +21,14 @@ include:
     - template: jinja
     - context:
         environment: {{
-          salt.slsutil.merge(
-            hadoop.environment, salt.slsutil.merge(
-              hadoop.hdfs.environment,
-              hadoop.hdfs.name_node.environment
-            )
-          )
+          salt.slsutil.merge_all([
+            hadoop.environment,
+            hadoop.hdfs.environment,
+            hadoop.hdfs.name_node.environment
+          ])
         }}
     - watch_in:
       - service: {{ hadoop.hdfs.name_node.service.name }}
-
-{#-
-#
-# I think I'd like for this to eventually be handled by a serializer
-#
-#{{ hadoop.hdfs.name_node.service.name }}_environment_file_installed:
-#  file.serialize:
-#    - name: /etc/sysconfig/{{ hadoop.hdfs.name_node.service.name }}
-#    - dataset: {{ hadoop.hdfs.name_node.environment }}
-#    - formatter: configparser
-#    - context:
-#        environment: {{ hadoop.hdfs.name_node.environment }}
-#    - watch_in:
-#      - service: {{ hadoop.hdfs.name_node.service.name }}
-#}
 
 {{ hadoop.hdfs.name_node.service.name }}_name_dir_installed:
   file.directory:
@@ -54,3 +36,23 @@ include:
     - user: {{ hadoop.user.name }}
     - group: {{ hadoop.group.name }}
     - makedirs: True
+    - require_in:
+      - service: {{ hadoop.hdfs.name_node.service.name }}
+
+{% if pillar.bootstrap | default('False') | lower() == 'true' -%}
+  {%- set environment = salt.slsutil.merge_all([
+      hadoop.environment,
+      hadoop.hdfs.environment,
+      hadoop.hdfs.name_node.environment
+    ])
+  %}
+
+{{ hadoop.hdfs.name_node.service.name }}_format_hdfs:
+  cmd.run:
+    - name: {{ '/opt/hadoop/bin/hdfs --config /etc/hadoop namenode -format {}'.format(hadoop.cluster_name) }}
+    - runas: {{ hadoop.user.name }}
+    - env:
+      - JAVA_HOME: {{ environment.JAVA_HOME }}
+    - require_in:
+      - service: {{ hadoop.hdfs.name_node.service.name }}
+{%- endif %}

@@ -1,4 +1,3 @@
 include:
   - .install
-  - .configure
   - .service

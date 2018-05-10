@@ -15,24 +15,41 @@ salt:
       hosts:
         - 10.0.1.3
 
-    # Target the NameNode and ResourceManager by internal IP
-    mine_functions:
-      internal_ip:
-        mine_function: 'network.interface_ip'
-        iface: 'eth0'
-
 # Hadoop settings
+# 
+# Many settings are merged with their more specific counter parts. In the
+# contrived pillar example below, JAVA_HOME is specified under hadoop,
+# hadoop.hdfs, and hadoop.hdfs.name_node. These will be merged such in the
+# following way.
+#
+# | Service         | JAVA_HOME                   |
+# ------------------------------------------------
+# | NameNode        | /hadoop/hdfs/name_node/java |
+# | DataNode        | /hadoop/hdfs/java           |
+# | ResourceManager | /hadoop/java                |
+# | NodeManager     | /hadoop/java                |
+#
+
 hadoop:
   version: 3.0.0
-  target: 'if101*'
-  target_type: 'glob'
 
-  # Specify a mine function which defines the connection string for the
-  # NameNode and ResourceManager
-  target_function: 'internal_ip'
-
+  environment:
+    JAVA_HOME: /hadoop/java
   hdfs:
-    name_node:
+    environment:
+      JAVA_HOME: /hadoop/hdfs/java
+    name_node: 
+
+      # Define which node is the NameNode
+      target: 'roles:name_node'
+      target_type: grain
+
+      # The NameNode endpoint will be stored in SDB. This parameter defines the
+      # grain used.
+      endpoint_grain:
+
+      environment:
+        JAVA_HOME: /hadoop/hdfs/name_node/java
 
       # The following configuration parameters are part of hdfs-site.xml on the
       # NameNode
@@ -41,3 +58,7 @@ hadoop:
         # The NameNode trys to perform a reverse DNS lookup of DataNodes and
         # treats failure as fatal by default
         dfs.namenode.datanode.registration.ip-hostname-check: 'false'
+
+  # Modify any log4j properties. See defaults in hadoop/defaults/log4j.yaml
+  log4j.properties:
+    hadoop.root.logger: 'DEBUG,console'
