@@ -47,38 +47,38 @@ Available States:
 - **hadoop.install**
   - Install user and  packages
 - **hadoop.hdfs**
- - Install Hadoop HDFS
+  - Install Hadoop HDFS
 - **hadoop.hdfs.configure**
   - Manage hdfs-site.xml
-- **hadoop.hdfs.name_node**
+- **hadoop.hdfs.name\_node**
   - Install Hadoop HDFS NameNode
-- **hadoop.hdfs.name_node.install**
+- **hadoop.hdfs.name\_node.install**
   - Manage service and environment file, and format HDFS
-- **hadoop.hdfs.name_node.service**
+- **hadoop.hdfs.name\_node.service**
   - Start the NameNode service
-- **hadoop.hdfs.name_node.store_name_node_endpoint**
+- **hadoop.hdfs.name\_node.store\_name\_node\_endpoint**
   - Store the NameNode endpoint in SDB
-- **hadoop.hdfs.data_node**
+- **hadoop.hdfs.data\_node**
   - Install Hadoop HDFS DataNode
-- **hadoop.hdfs.data_node.install**
+- **hadoop.hdfs.data\_node.install**
   - Manage service and environment file
-- **hadoop.hdfs.data_node.service**
+- **hadoop.hdfs.data\_node.service**
   - Start the NameNode service
 - **hadoop.yarn**
   - Install Hadoop YARN
 - **hadoop.yarn.configure**
   - Manage yarn-site.xml
-- **hadoop.yarn.resource_manager**
+- **hadoop.yarn.resource\_manager**
   - Install Hadoop YARN ResourceManager
-- **hadoop.yarn.resource_manager.install**
+- **hadoop.yarn.resource\_manager.install**
   - Manage service and environment file
-- **hadoop.yarn.resource_manager.service**
+- **hadoop.yarn.resource\_manager.service**
   - Start the ResourceManager service
-- **hadoop.yarn.resource_manager.store_resource_manager_endpoint**
+- **hadoop.yarn.resource\_manager.store\_resource\_manager\_endpoint**
   - Store the ResourceManager endpoint in SDB
-- **hadoop.yarn.node_manager**
+- **hadoop.yarn.node\_manager**
   - Install Hadoop YARN NodeManager
-- **hadoop.yarn.node_manager.install**
+- **hadoop.yarn.node\_manager.install**
   - Manage service and environment file
-- **hadoop.yarn.node_manager.service**
+- **hadoop.yarn.node\_manager.service**
   - Start the NodeManager service
