@@ -6,7 +6,7 @@
 include:
   - .configure
 
-{%- if salt['match.{}'.format(data_node.target_type)](data_node.target) %}
+{%- if salt['match.{}'.format(name_node.target_type)](name_node.target) %}
   - .name_node
 {%- endif %}
 

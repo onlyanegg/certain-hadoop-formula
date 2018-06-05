@@ -6,7 +6,7 @@
 include:
   - .configure
 
-{%- if salt['match.{}'.format(node_manager.target_type)](node_manager.target) %}
+{%- if salt['match.{}'.format(resource_manager.target_type)](resource_manager.target) %}
   - .resource_manager
 {%- endif %}
 
