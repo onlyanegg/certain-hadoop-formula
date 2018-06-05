@@ -4,7 +4,6 @@
 {%- set data_node = hadoop.hdfs.data_node %}
 
 include:
-  - .install
   - .configure
 
 {%- if salt['match.{}'.format(data_node.target_type)](data_node.target) %}

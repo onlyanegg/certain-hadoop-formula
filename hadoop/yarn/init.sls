@@ -4,7 +4,6 @@
 {%- set node_manager = hadoop.yarn.node_manager %}
 
 include:
-  - .install
   - .configure
 
 {%- if salt['match.{}'.format(node_manager.target_type)](node_manager.target) %}
