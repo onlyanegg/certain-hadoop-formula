@@ -9,6 +9,6 @@ hadoop_store_name_node_endpoint:
   module.run:
     - name: sdb.set
     - uri: 'sdb://hadoop/name_node'
-    - value: '{{ grains.get(hadoop.hdfs.name_node.endpoint_grain) }}'
+    - value: '{{ salt['grains.get'](hadoop.hdfs.name_node.endpoint_grain) }}'
     - require_in:
       - service: {{ hadoop.hdfs.name_node.service.name }}
