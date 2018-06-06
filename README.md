@@ -35,6 +35,9 @@ Bootstrap:
 Passing the bootstrap pillar tells the NameNode and ResourceManager to store
 their endpoints in SDB and tells the NameNode to format HDFS.
 
+**WARNING**: Passing this option will reformat HDFS which is a destructive
+operation. Only do this if you are comfortable losing data.
+
 ```
 salt '<tgt>' state.apply hadoop pillar='{"bootstrap": "True"}'
 ```
